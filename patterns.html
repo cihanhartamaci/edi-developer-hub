@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integration Patterns | Cihan Hartamaci</title>
+    <meta name="description"
+        content="Standardized specs for ANSI X12, EDIFACT, and Hybrid Cloud architectures. Explore integration patterns.">
+    <meta property="og:title" content="Integration Patterns // EDI.HUB">
+    <meta property="og:description" content="Technical documentation for ANSI X12, EDIFACT and Hybrid Architectures.">
+    <meta property="og:image" content="https://edi-developer-hub.netlify.app/assets/social-preview.png">
+    <meta property="og:url" content="https://edi-developer-hub.netlify.app/patterns.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <nav class="top-nav">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">CH.integrate()</a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="patterns.html" class="nav-link active">Patterns</a>
+                <a href="tools.html" class="nav-link">Tools</a>
+                <a href="insights.html" class="nav-link">Insights</a>
+                <a href="expertise.html" class="nav-link">Expertise</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="dashboard.html" class="nav-link" style="color:var(--accent-green);"><i class="fas fa-lock"></i>
+                    Dashboard</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <header class="page-header">
+            <h1 class="page-title">Integration Methodology</h1>
+            <p class="page-subtitle">Standardized approaches for data interchange, translation, and orchestration.</p>
+        </header>
+
+        <div class="grid-cards">
+            <!-- Pattern 1 -->
+            <div class="tech-card">
+                <div
+                    style="margin-bottom:1rem; font-family:var(--font-mono); color:var(--text-secondary); font-size:0.8rem;">
+                    REF: EDI-STD-01</div>
+                <h3>EDI Standards</h3>
+                <p style="margin-bottom:1rem;">Expert handling of ANSI X12 & EDIFACT formats for supply chain
+                    automation. Seamless translation to internal ERP structures.</p>
+                <div>
+                    <span class="mono-tag">PO (850/ORDERS)</span>
+                    <span class="mono-tag">ASN (856/DESADV)</span>
+                </div>
+            </div>
+
+            <!-- Pattern 2 -->
+            <div class="tech-card">
+                <div
+                    style="margin-bottom:1rem; font-family:var(--font-mono); color:var(--text-secondary); font-size:0.8rem;">
+                    REF: API-ORCH-02</div>
+                <h3>API Orchestration</h3>
+                <p style="margin-bottom:1rem;">Designing modern RESTful & SOAP architectures. Secure, scalable
+                    microservices integration using robust gateways.</p>
+                <div>
+                    <span class="mono-tag">OAuth2</span>
+                    <span class="mono-tag">Swagger</span>
+                </div>
+            </div>
+
+            <!-- Pattern 3 -->
+            <div class="tech-card">
+                <div
+                    style="margin-bottom:1rem; font-family:var(--font-mono); color:var(--text-secondary); font-size:0.8rem;">
+                    REF: HYB-SYNC-03</div>
+                <h3>Hybrid Sync</h3>
+                <p style="margin-bottom:1rem;">Bridging legacy mainframes with cloud-native apps. Real-time data
+                    synchronization with fault-tolerant retry logic.</p>
+                <div>
+                    <span class="mono-tag">Retry Logic</span>
+                    <span class="mono-tag">Queueing</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Command Palette -->
+    <script src="js/cmd-palette.js"></script>
+    <script type="module" src="js/tracker.js"></script>
+</body>
+
+</html>

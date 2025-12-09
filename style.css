@@ -1,0 +1,499 @@
+:root {
+    /* VS Code / GitHub Dark Dimmed Palette */
+    --bg-body: #0d1117;
+    --bg-card: #161b22;
+    --border-color: #30363d;
+    --text-primary: #c9d1d9;
+    --text-secondary: #8b949e;
+    --accent-blue: #58a6ff;
+    --accent-green: #7ee787;
+    --accent-orange: #d29922;
+    --accent-red: #ff7b72;
+
+    --font-mono: 'Fira Code', monospace;
+    --font-sans: 'Inter', sans-serif;
+
+    --nav-height: 60px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-body);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+.mono-font {
+    font-family: var(--font-mono);
+}
+
+a {
+    text-decoration: none;
+    color: var(--accent-blue);
+    transition: all 0.2s ease;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* UI Utilities */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.mono-tag {
+    font-family: var(--font-mono);
+    color: var(--accent-green);
+    background: rgba(126, 231, 135, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+/* Navigation - File Tab Style */
+.top-nav {
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border-color);
+    height: var(--nav-height);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.logo {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: var(--accent-orange);
+    font-size: 1.2rem;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1px;
+    /* border separation */
+}
+
+.nav-link {
+    color: var(--text-secondary);
+    padding: 0 1.5rem;
+    height: var(--nav-height);
+    display: flex;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    border-right: 1px solid transparent;
+    border-left: 1px solid transparent;
+}
+
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.02);
+    text-decoration: none;
+    color: var(--text-primary);
+}
+
+.nav-link.active {
+    background: var(--bg-body);
+    border-top: 2px solid var(--accent-orange);
+    color: var(--text-primary);
+    border-right: 1px solid var(--border-color);
+    border-left: 1px solid var(--border-color);
+}
+
+/* Page Headers */
+.page-header {
+    padding: 4rem 0 2rem;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 2rem;
+}
+
+.page-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.page-subtitle {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    max-width: 600px;
+}
+
+/* Cards (Standard) */
+.grid-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.tech-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    border-radius: 6px;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.tech-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-blue);
+}
+
+.tech-card h3 {
+    color: var(--accent-blue);
+    margin-bottom: 1rem;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: var(--accent-blue);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #3a8ee6;
+    text-decoration: none;
+}
+
+.btn-outline {
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+.btn-outline:hover {
+    border-color: var(--text-primary);
+}
+
+/* --- COMMAND PALETTE (CTRL+K) --- */
+.cmd-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 25, 47, 0.85);
+    /* Glass dark */
+    backdrop-filter: blur(5px);
+    z-index: 99999;
+    /* Top most */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 15vh;
+    opacity: 1;
+    transition: opacity 0.2s;
+}
+
+.cmd-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+    display: none;
+}
+
+.cmd-modal {
+    background: var(--card-bg);
+    /* Use existing card-bg */
+    width: 600px;
+    max-width: 90%;
+    border-radius: 8px;
+    border: 1px solid var(--primary);
+    box-shadow: 0 0 30px rgba(100, 255, 218, 0.15);
+    overflow: hidden;
+    animation: slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.cmd-header {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.cmd-header i {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    margin-right: 1rem;
+}
+
+#cmd-input {
+    background: transparent;
+    border: none;
+    color: var(--white);
+    font-family: 'Fira Code', monospace;
+    font-size: 1.1rem;
+    flex: 1;
+    outline: none;
+}
+
+.cmd-badge {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-muted);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-family: sans-serif;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cmd-results {
+    /* max-height: 400px; */
+    /* overflow-y: auto; */
+    padding: 0.5rem;
+}
+
+.cmd-placeholder {
+    padding: 2rem;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.cmd-key {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2px 5px;
+    border-radius: 3px;
+    color: var(--white);
+}
+
+.cmd-item {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-bottom: 2px;
+    transition: all 0.2s;
+    border-left: 2px solid transparent;
+}
+
+.cmd-item:hover,
+.cmd-item:focus {
+    background: rgba(100, 255, 218, 0.05);
+    /* Tint of primary */
+    border-left-color: var(--primary);
+}
+
+.cmd-item-icon {
+    width: 30px;
+    text-align: center;
+    color: var(--text-muted);
+    margin-right: 1rem;
+    font-size: 0.9rem;
+}
+
+.cmd-item:hover .cmd-item-icon {
+    color: var(--primary);
+}
+
+.cmd-item-info {
+    flex: 1;
+}
+
+.cmd-item-title {
+    color: var(--text-main);
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.cmd-item-type {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    margin-top: 2px;
+}
+
+.cmd-arrow {
+    opacity: 0;
+    color: var(--primary);
+    transform: translateX(-10px);
+    transition: all 0.2s;
+}
+
+.cmd-item:hover .cmd-arrow {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* --- TERMINAL WIZARD --- */
+.terminal-window {
+    background: #0a192f;
+    border: 1px solid rgba(100, 255, 218, 0.2);
+    border-radius: 6px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    font-family: 'Fira Code', monospace;
+    margin: 2rem 0;
+    max-width: 800px;
+}
+
+.terminal-bar {
+    background: #172a45;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dot {
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 6px;
+}
+
+.red {
+    background: #ff5f56;
+}
+
+.yellow {
+    background: #ffbd2e;
+}
+
+.green {
+    background: #27c93f;
+}
+
+.terminal-title {
+    margin-left: 10px;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+.terminal-body {
+    padding: 1rem;
+    height: 350px;
+    /* Fixed height for scroll */
+    overflow-y: auto;
+    color: var(--text-main);
+    font-size: 0.95rem;
+}
+
+.msg {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+}
+
+.msg.system {
+    color: var(--primary);
+}
+
+.msg.user {
+    color: var(--white);
+    opacity: 0.9;
+    margin-left: 1rem;
+    border-left: 2px solid var(--text-muted);
+    padding-left: 0.5rem;
+}
+
+.terminal-input-line {
+    display: flex;
+    padding: 1rem;
+    background: rgba(100, 255, 218, 0.05);
+    align-items: center;
+}
+
+.terminal-input-line .prompt {
+    color: var(--primary);
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+#wizard-input {
+    background: transparent;
+    border: none;
+    color: var(--white);
+    font-family: 'Fira Code', monospace;
+    flex: 1;
+    outline: none;
+    font-size: 1rem;
+}
+
+#wizard-input.hidden {
+    display: none;
+}
+
+/* --- DASHBOARD NAVBAR FIX --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    /* Added horizontal padding */
+    margin-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 10001;
+}
+
+.navbar .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.navbar .nav-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar .nav-links li {
+    display: inline-block;
+}
+
+.navbar .nav-links a {
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.navbar .nav-links a:hover {
+    color: var(--primary);
+}

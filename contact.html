@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Cihan Hartamaci</title>
+    <meta name="description" content="Contact Cihan Hartamaci for your next API or EDI integration project.">
+    <meta property="og:title" content="Contact // EDI.HUB">
+    <meta property="og:description" content="Start your integration project today.">
+    <meta property="og:image" content="https://edi-developer-hub.netlify.app/assets/social-preview.png">
+    <meta property="og:url" content="https://edi-developer-hub.netlify.app/contact.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <nav class="top-nav">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">CH.integrate()</a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="patterns.html" class="nav-link">Patterns</a>
+                <a href="tools.html" class="nav-link">Tools</a>
+                <a href="insights.html" class="nav-link">Insights</a>
+                <a href="expertise.html" class="nav-link">Expertise</a>
+                <a href="contact.html" class="nav-link active">Contact</a>
+                <a href="dashboard.html" class="nav-link" style="color:var(--accent-green);"><i class="fas fa-lock"></i>
+                    Dashboard</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="page-header">
+            <h1 class="page-title">> INITIALIZE_PROTOCOL</h1>
+            <p class="page-subtitle">Start a new secure communication channel.</p>
+        </section>
+
+        <!-- Terminal Wizard Interface -->
+        <div class="terminal-window" id="contact-terminal">
+            <div class="terminal-bar">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+                <span class="terminal-title">bash -- direct-link</span>
+            </div>
+            <div class="terminal-body" id="wizard-output">
+                <!-- Chat log goes here -->
+                <div class="msg system">
+                    <span class="prompt">$</span> ./init_contact_sequence.sh
+                </div>
+                <div class="msg system">
+                    Loading Protocol... [OK]
+                </div>
+            </div>
+            <div class="terminal-input-line">
+                <span class="prompt">></span>
+                <input type="text" id="wizard-input" placeholder="Type your response..." autocomplete="off">
+            </div>
+        </div>
+
+        <!-- Hidden Form Removed (Migrated to Firestore) -->
+    </main>
+
+    <!-- Command Palette -->
+    <!-- Command Palette -->
+    <script src="js/cmd-palette.js"></script>
+    <script type="module" src="js/wizard.js"></script>
+    <script type="module" src="js/tracker.js"></script>
+</body>
+
+</html>

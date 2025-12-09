@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live EDI Tools | Cihan Hartamaci</title>
+    <meta name="description"
+        content="Visual X12 and EDIFACT Parser. Analyze, format, and debug EDI files in your browser.">
+    <!-- Meta Tags -->
+    <meta property="og:title" content="EDI Tools // Cihan Hartamaci">
+    <meta property="og:description" content="Live X12/EDIFACT Parser and Analyzer.">
+    <meta property="og:image" content="https://edi-developer-hub.netlify.app/assets/social-preview.png">
+    <meta property="og:url" content="https://edi-developer-hub.netlify.app/tools.html">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .tool-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+            height: 70vh;
+        }
+
+        @media (max-width: 768px) {
+            .tool-container {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+        }
+
+        .editor-box {
+            display: flex;
+            flex-direction: column;
+            background: rgba(17, 34, 64, 0.5);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            border-radius: 4px;
+        }
+
+        .editor-header {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.5rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .editor-title {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .editor-content {
+            flex: 1;
+            padding: 1rem;
+            overflow: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+        }
+
+        textarea.raw-input {
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            resize: none;
+            outline: none;
+            line-height: 1.5;
+        }
+
+        .tree-view {
+            padding: 0;
+        }
+
+        .segment-node {
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            border-left: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .segment-node:hover {
+            background: rgba(255, 255, 255, 0.02);
+            border-left-color: var(--primary);
+        }
+
+        .seg-id {
+            color: var(--primary);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .ele {
+            color: var(--text-muted);
+            margin-right: 5px;
+        }
+
+        .ele-val {
+            color: #ce9178;
+        }
+
+        .btn-sm {
+            padding: 0.2rem 0.6rem;
+            font-size: 0.75rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="top-nav">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">CH.integrate()</a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="patterns.html" class="nav-link">Patterns</a>
+                <a href="tools.html" class="nav-link active">Tools</a> <!-- New Page -->
+                <a href="insights.html" class="nav-link">Insights</a>
+                <a href="expertise.html" class="nav-link">Expertise</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="dashboard.html" class="nav-link" style="color:var(--accent-green);"><i class="fas fa-lock"></i>
+                    Dashboard</a>
+            </div>
+        </div>
+        </main>
+
+        <main class="container">
+            <header class="page-header">
+                <h1 class="page-title">EDI X-Ray Tool</h1>
+                <p class="page-subtitle">Instant breakdown of ANSI X12 and EDIFACT messages.</p>
+            </header>
+
+            <div class="tool-container">
+                <!-- Left: Raw Input -->
+                <div class="editor-box">
+                    <div class="editor-header">
+                        <span class="editor-title">Raw Payload</span>
+                        <div>
+                            <button class="btn btn-outline btn-sm" onclick="loadSample('850')">Load 850</button>
+                            <button class="btn btn-outline btn-sm" onclick="loadSample('DESADV')">Load DESADV</button>
+                        </div>
+                    </div>
+                    <div class="editor-content">
+                        <textarea class="raw-input" id="edi-input"
+                            placeholder="Paste EDI segment string here... (ISA*00*... or UNA:+.?)"></textarea>
+                    </div>
+                </div>
+
+                <!-- Right: Parsed Tree -->
+                <div class="editor-box">
+                    <div class="editor-header">
+                        <span class="editor-title">Segment Inspector</span>
+                        <span class="editor-title" id="detected-format">FORMAT: UNKNOWN</span>
+                    </div>
+                    <div class="editor-content tree-view" id="edi-output">
+                        <div style="color:var(--text-muted); text-align:center; padding-top:2rem;">
+                            Waiting for input stream...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Scripts -->
+        <script src="js/cmd-palette.js"></script>
+        <script src="js/edi-parser.js"></script>
+        <script type="module" src="js/tracker.js"></script>
+</body>
+
+</html>

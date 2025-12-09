@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /dashboard.html
+Disallow: /admin/
+Sitemap: https://edi-developer-hub.netlify.app/sitemap.xml

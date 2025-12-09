@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Insights | Cihan Hartamaci</title>
+    <meta name="description"
+        content="Deep dives into Netsuite SuiteScript, SAP IDOCs, and API Security. Integration technical insights.">
+    <meta property="og:title" content="Technical Insights // EDI.HUB">
+    <meta property="og:description" content="Deep dives into Netsuite SuiteScript, SAP IDOCs, and API Security.">
+    <meta property="og:image" content="https://edi-developer-hub.netlify.app/assets/social-preview.png">
+    <meta property="og:url" content="https://edi-developer-hub.netlify.app/insights.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <nav class="top-nav">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">CH.integrate()</a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="patterns.html" class="nav-link">Patterns</a>
+                <a href="tools.html" class="nav-link">Tools</a>
+                <a href="insights.html" class="nav-link active">Insights</a>
+                <a href="expertise.html" class="nav-link">Expertise</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="dashboard.html" class="nav-link" style="color:var(--accent-green);"><i class="fas fa-lock"></i>
+                    Dashboard</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <header class="page-header">
+            <h1 class="page-title">Technical Insights</h1>
+            <p class="page-subtitle">Whitepapers, architectural decisions, and code snippets.</p>
+        </header>
+
+        <div style="max-width: 800px;">
+            <!-- Article 1 -->
+            <div class="tech-card" style="margin-bottom: 2rem;">
+                <h3 style="font-size:1.5rem;">Netsuite ERP Integration</h3>
+                <div style="margin-bottom:1rem;">
+                    <span class="mono-tag">SuiteTalk</span>
+                    <span class="mono-tag">SuiteScript</span>
+                </div>
+                <p style="color:var(--text-secondary); margin-bottom:1rem;">
+                    Leveraging SuiteTalk (SOAP/REST) for external connectivity. Strategies for syncing Orders and
+                    Inventory using User Event Scripts and Map/Reduce jobs.
+                </p>
+                <div
+                    style="background: #000; padding:1rem; border-radius:4px; font-family:var(--font-mono); font-size:0.8rem; color:#d29922; margin-top:1rem;">
+                    // Example: Syncing Order<br>
+                    function syncOrder(context) {<br>
+                    &nbsp;&nbsp;var record = context.newRecord;<br>
+                    &nbsp;&nbsp;log.audit('Sync Start', record.id);<br>
+                    }
+                </div>
+            </div>
+
+            <!-- Article 2 -->
+            <div class="tech-card" style="margin-bottom: 2rem;">
+                <h3 style="font-size:1.5rem;">Modernizing Legacy EDI</h3>
+                <div style="margin-bottom:1rem;">
+                    <span class="mono-tag">EDIFACT</span>
+                    <span class="mono-tag">REST Wrapper</span>
+                </div>
+                <p style="color:var(--text-secondary); margin-bottom:1rem;">
+                    Strategies for wrapping legacy X12/EDIFACT systems with modern RESTful layers to allow microservices
+                    usage while properly handling translation.
+                </p>
+            </div>
+
+            <!-- Article 3 -->
+            <div class="tech-card" style="margin-bottom: 2rem;">
+                <h3 style="font-size:1.5rem;">Secure B2B Gateways</h3>
+                <div style="margin-bottom:1rem;">
+                    <span class="mono-tag">AS2</span>
+                    <span class="mono-tag">mTLS</span>
+                </div>
+                <p style="color:var(--text-secondary); margin-bottom:1rem;">
+                    Implementing robust security protocols like AS2 encryption and Mutual TLS for sensitive financial
+                    data exchange over public networks.
+                </p>
+            </div>
+
+            <!-- Article 4 -->
+            <div class="tech-card" style="margin-bottom: 2rem;">
+                <h3 style="font-size:1.5rem;">SAP Integration Patterns</h3>
+                <div style="margin-bottom:1rem;">
+                    <span class="mono-tag">SAP IDOC</span>
+                    <span class="mono-tag">RFC</span>
+                    <span class="mono-tag">Middleware</span>
+                </div>
+                <p style="color:var(--text-secondary); margin-bottom:1rem;">
+                    Best practices for routing IDOCs through middleware solutions (Mulesoft/Boomi) to ensure data
+                    integrity and decouple SAP from external systems.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Command Palette -->
+    <script src="js/cmd-palette.js"></script>
+    <script type="module" src="js/tracker.js"></script>
+</body>
+
+</html>

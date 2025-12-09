@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDI Hub Analytics</title>
+    <meta name="robots" content="noindex"> <!-- Private Dashboard -->
+    <meta name="description" content="Private Analytics Dashboard for EDI Developer Hub.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        .dashboard-container {
+            padding-top: 100px;
+            padding-bottom: 50px;
+            min-height: 100vh;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: rgba(17, 34, 64, 0.7);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            padding: 1.5rem;
+            border-radius: 4px;
+            text-align: center;
+            font-family: 'Fira Code', monospace;
+        }
+
+        .stat-card h3 {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .stat-card .value {
+            font-size: 2.5rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .data-table-container {
+            background: rgba(17, 34, 64, 0.5);
+            border-radius: 4px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            color: var(--text-main);
+            font-size: 0.9rem;
+            font-family: 'Fira Code', monospace;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        th {
+            color: var(--primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+
+        tr:hover {
+            background: rgba(100, 255, 218, 0.05);
+        }
+
+        .status-dot {
+            height: 8px;
+            width: 8px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+
+        /* Auth Overlay */
+        #auth-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(13, 17, 23, 0.85);
+            /* Dark dimmed background */
+            backdrop-filter: blur(5px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .login-box {
+            background: #161b22;
+            /* --bg-card equivalent */
+            padding: 2.5rem;
+            border-radius: 4px;
+            border: 1px solid var(--primary);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 0 20px rgba(100, 255, 218, 0.1);
+        }
+
+        .login-box h2 {
+            font-family: 'Fira Code', monospace;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .login-box input {
+            background: var(--bg-dark);
+            border: 1px solid var(--text-muted);
+            padding: 1rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+            border-radius: 2px;
+            width: 100%;
+            font-family: 'Fira Code', monospace;
+        }
+
+        .login-box button {
+            width: 100%;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* FORCE NETLIFY WIDGET ON TOP */
+        iframe[id^="netlify-identity-widget"] {
+            z-index: 10000 !important;
+        }
+
+        div[class^="netlify-identity"] {
+            z-index: 10001 !important;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Auth Overlay (Netlify Identity) -->
+    <div id="auth-overlay">
+        <div class="login-box">
+            <h2><i class="fas fa-lock"></i> Restricted Access</h2>
+            <p style="margin-bottom: 1.5rem; color: var(--text-muted); font-size: 0.9rem;">
+                This dashboard tracks traffic for the EDI Developer Hub. <br>Please log in to continue.
+            </p>
+            <div id="login-form">
+                <input type="email" id="email" placeholder="admin@cihanhartamaci.com" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button class="btn primary-btn" id="login-btn">Login</button>
+            </div>
+            <p id="login-msg"
+                style="color: #ff6b6b; margin-top: 15px; font-size: 0.85rem; font-family: 'Fira Code', monospace;"></p>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="logo">EDI.HUB <span style="font-size: 0.6em; color: var(--text-muted);">// ANALYTICS</span></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Exit to Hub</a></li>
+            <li><a href="tools.html">Tools</a></li>
+            <li><a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </nav>
+
+    <div class="container dashboard-container">
+        <header style="margin-bottom: 2.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem;">
+            <h1 class="section-title" style="margin-bottom: 0.5rem;">System Statistics</h1>
+            <p style="color: var(--text-muted);">Monitoring visitor traffic and geographic distribution.</p>
+        </header>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Total Hits</h3>
+                <div class="value" id="total-visits">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Unique IPs</h3>
+                <div class="value" id="unique-visitors">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Top Region</h3>
+                <div class="value" id="top-country">-</div>
+            </div>
+            <div class="stat-card">
+                <h3>Last Ping</h3>
+                <div class="value" id="last-active" style="font-size: 1.5rem;">-</div>
+            </div>
+        </div>
+
+        <!-- Inbox Section -->
+        <h2 style="margin-bottom: 1rem; font-size: 1.2rem; font-family: 'Fira Code', monospace; margin-top: 2rem;">
+            <i class="fas fa-envelope"></i> Inbox (Messages)
+        </h2>
+        <div class="data-table-container" style="margin-bottom: 3rem;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>From</th>
+                        <th>Type</th>
+                        <th>Message</th>
+                    </tr>
+                </thead>
+                <tbody id="inbox-table-body">
+                    <!-- Rows injected by JS -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Recent Visits Table -->
+        <h2 style="margin-bottom: 1rem; font-size: 1.2rem; font-family: 'Fira Code', monospace;">
+            <i class="fas fa-terminal"></i> Recent Access Logs
+        </h2>
+        <div class="data-table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Timestamp</th>
+                        <th>Origin</th>
+                        <th>IP Node</th>
+                        <th>Target</th>
+                        <th>Client</th>
+                    </tr>
+                </thead>
+                <tbody id="visits-table-body">
+                    <!-- Rows injected by JS -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Netlify Identity Removed -->
+    <!-- Command Palette -->
+    <script src="js/cmd-palette.js"></script>
+    <script type="module" src="js/dashboard.js"></script>
+</body>
+
+</html>
