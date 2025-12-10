@@ -728,15 +728,13 @@ max-width: none !important;
 }
 
 .login-box h2 {
-    background: linear-gradient(135deg, var(--accent-blue), #58a6ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--accent-blue);
     margin-bottom: 0.5rem;
     font-family: var(--font-mono);
     font-size: 1.8rem;
     font-weight: 700;
     letter-spacing: -0.5px;
+    text-shadow: 0 0 20px rgba(47, 129, 247, 0.3);
 }
 
 .login-input {
