@@ -155,9 +155,18 @@
             if (originalSvg) {
                 content.innerHTML = '';
                 const clone = originalSvg.cloneNode(true);
+
+                // Aggressively remove constraints
                 clone.removeAttribute('height');
                 clone.removeAttribute('width');
-                clone.style.maxWidth = '100%';
+                clone.removeAttribute('style'); // Remove inline styles (max-width often here)
+                clone.removeAttribute('id');    // Prevent ID collision
+
+                // Force full size
+                clone.style.width = '100%';
+                clone.style.height = '100%';
+                clone.style.maxWidth = 'none';
+
                 content.appendChild(clone);
                 lightbox.classList.remove('hidden');
             }

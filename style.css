@@ -545,8 +545,14 @@ body.theme-solar .tech-card:hover {
     border: 1px solid var(--accent-blue);
     border-radius: 8px;
     padding: 2rem;
-    max-width: 95vw;
-    max-height: 90vh;
+    width: 90vw;
+    /* Force width to be large */
+    height: 85vh;
+    /* Force height to be large */
+    display: flex;
+    /* Center SVG */
+    align-items: center;
+    justify-content: center;
     overflow: auto;
     position: relative;
     box-shadow: 0 0 50px rgba(47, 129, 247, 0.2);
