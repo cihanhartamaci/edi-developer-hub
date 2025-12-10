@@ -1,0 +1,24 @@
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2f81f7;stop-opacity:0.2" />
+      <stop offset="100%" style="stop-color:#1f6feb;stop-opacity:0" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Circuit Lines -->
+  <path d="M10 10 L40 10 L40 40" stroke="#30363d" stroke-width="0.5" fill="none"/>
+  <circle cx="10" cy="10" r="1.5" fill="#2f81f7" opacity="0.4"/>
+  <circle cx="40" cy="40" r="1.5" fill="#2f81f7" opacity="0.4"/>
+
+  <path d="M60 10 L60 30 L90 30" stroke="#30363d" stroke-width="0.5" fill="none"/>
+  <circle cx="60" cy="10" r="1.5" fill="#3fb950" opacity="0.4"/>
+  <circle cx="90" cy="30" r="1.5" fill="#3fb950" opacity="0.4"/>
+
+  <path d="M10 90 L30 90 L30 60" stroke="#30363d" stroke-width="0.5" fill="none"/>
+  <circle cx="10" cy="90" r="1.5" fill="#d29922" opacity="0.4"/>
+  <circle cx="30" cy="60" r="1.5" fill="#d29922" opacity="0.4"/>
+
+  <!-- Faint Grid -->
+  <rect x="0" y="0" width="100" height="100" fill="url(#grad1)" opacity="0.05"/>
+</svg>
