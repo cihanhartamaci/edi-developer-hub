@@ -17,25 +17,33 @@
 </head>
 
 <body>
-    <!-- Auth Overlay (Netlify Identity) -->
+    <!-- Auth Overlay -->
     <div id="auth-overlay" style="display:flex;">
-        <!-- Top Right Exit Button (Always Visible) -->
-        <a href="index.html" class="exit-btn-fixed">
-            <i class="fas fa-times"></i> Exit to Hub
-        </a>
-
         <div class="login-box">
             <h2><i class="fas fa-lock"></i> Restricted Access</h2>
-            <p style="margin-bottom: 1.5rem; color: var(--text-muted); font-size: 0.9rem;">
-                This dashboard tracks traffic for the EDI Developer Hub. <br>Please log in to continue.
+            <p style="margin-bottom: 2rem; color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+                This dashboard tracks real-time traffic for the EDI Developer Hub.<br>
+                Please verify your identity to continue.
             </p>
+
             <div id="login-form">
-                <input type="email" id="email" placeholder="admin@cihanhartamaci.com" required>
-                <input type="password" id="password" placeholder="Password" required>
-                <button class="btn primary-btn" id="login-btn">Login</button>
+                <input type="email" id="email" class="login-input" placeholder="admin@cihanhartamaci.com" required>
+                <input type="password" id="password" class="login-input" placeholder="Password" required>
+
+                <button id="login-btn" class="login-btn">
+                    <i class="fas fa-sign-in-alt"></i> SYSTEM LOGIN
+                </button>
+
+                <div style="margin-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
+                    <a href="index.html" class="exit-link">
+                        <i class="fas fa-arrow-left"></i> Return to Public Hub
+                    </a>
+                </div>
             </div>
+
             <p id="login-msg"
-                style="color: #ff6b6b; margin-top: 15px; font-size: 0.85rem; font-family: 'Fira Code', monospace;"></p>
+                style="color: #ff6b6b; margin-top: 1rem; font-size: 0.85rem; font-family: 'Fira Code', monospace; min-height: 20px;">
+            </p>
         </div>
     </div>
 

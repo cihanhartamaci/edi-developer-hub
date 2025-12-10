@@ -602,6 +602,88 @@ body.theme-solar .tech-card:hover {
     max-width: none !important;
 }
 
+/* --- LOGIN BOX STYLES (Added for Dashboard) --- */
+.login-box {
+    background: rgba(17, 34, 64, 0.95);
+    border: 1px solid var(--accent-blue);
+    border-radius: 12px;
+    padding: 3rem;
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 0 40px rgba(47, 129, 247, 0.15);
+    backdrop-filter: blur(12px);
+}
+
+.login-box h2 {
+    color: var(--accent-blue);
+    margin-bottom: 2rem;
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+}
+
+.login-input {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--border-color);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    border-radius: 6px;
+    outline: none;
+    transition: all 0.2s;
+}
+
+.login-input:focus {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 10px rgba(47, 129, 247, 0.2);
+}
+
+.login-btn {
+    width: 100%;
+    padding: 1rem;
+    background: var(--accent-blue);
+    color: #000;
+    font-weight: 700;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: var(--font-mono);
+    margin-bottom: 1rem;
+    transition: all 0.2s;
+}
+
+.login-btn:hover {
+    background: #58a6ff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(47, 129, 247, 0.3);
+}
+
+.exit-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.exit-link:hover {
+    color: var(--text-primary);
+    border-color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+height: auto !important;
+max-width: none !important;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
