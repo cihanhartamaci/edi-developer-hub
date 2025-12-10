@@ -33,21 +33,34 @@ function initAuth() {
         }
     });
 
-    // Login Action
-    loginBtn.addEventListener('click', async () => {
+    // Login Action (Click)
+    loginBtn.addEventListener('click', () => performLogin());
+
+    // Login Action (Enter Key)
+    passInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') performLogin();
+    });
+
+    async function performLogin() {
         const email = emailInput.value;
         const password = passInput.value;
+
+        if (!email || !password) {
+            msg.textContent = "Please enter both email and password.";
+            return;
+        }
 
         msg.textContent = "Authenticating...";
 
         try {
             await signInWithEmailAndPassword(auth, email, password);
             msg.textContent = "";
+            // onAuthStateChanged will handle the UI
         } catch (error) {
             console.error("Login failed", error);
             msg.textContent = "Access Denied: Invalid credentials.";
         }
-    });
+    }
 
     // Logout Action - FIXED: Redirects to home
     logoutBtn.addEventListener('click', async (e) => {
