@@ -161,7 +161,12 @@
                 <div class="editor-box">
                     <div class="editor-header">
                         <span class="editor-title">Segment Inspector</span>
-                        <span class="editor-title" id="detected-format">FORMAT: UNKNOWN</span>
+                        <div style="display: flex; gap: 1rem; align-items: center;">
+                            <span class="editor-title" id="detected-format">FORMAT: UNKNOWN</span>
+                            <button id="btn-humanize" class="btn btn-outline btn-sm" onclick="toggleHumanize()">
+                                <i class="fas fa-magic"></i> Humanize
+                            </button>
+                        </div>
                     </div>
                     <div class="editor-content tree-view" id="edi-output">
                         <div style="color:var(--text-muted); text-align:center; padding-top:2rem;">

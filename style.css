@@ -496,4 +496,45 @@ a:hover {
 
 .navbar .nav-links a:hover {
     color: var(--primary);
-}
+} 
+ / *   - - -   T Y P E W R I T E R   E F F E C T   - - -   * /  
+ . t y p i n g - c u r s o r   {  
+         d i s p l a y :   i n l i n e - b l o c k ;  
+         w i d t h :   8 p x ;  
+         b a c k g r o u n d - c o l o r :   v a r ( - - a c c e n t - g r e e n ) ;  
+         a n i m a t i o n :   b l i n k   1 s   s t e p - e n d   i n f i n i t e ;  
+         m a r g i n - l e f t :   2 p x ;  
+ }  
+  
+ @ k e y f r a m e s   b l i n k   {  
+         0 % ,   1 0 0 %   {   o p a c i t y :   1 ;   }  
+         5 0 %   {   o p a c i t y :   0 ;   }  
+ }  
+  
+ / *   - - -   H U M A N I Z E D   E D I   P A R S E R   - - -   * /  
+ . e d i - l a b e l   {  
+         d i s p l a y :   b l o c k ;  
+         f o n t - s i z e :   0 . 6 r e m ;  
+         c o l o r :   v a r ( - - a c c e n t - o r a n g e ) ;  
+         t e x t - t r a n s f o r m :   u p p e r c a s e ;  
+         m a r g i n - b o t t o m :   2 p x ;  
+         f o n t - f a m i l y :   v a r ( - - f o n t - s a n s ) ;  
+         l e t t e r - s p a c i n g :   0 . 5 p x ;  
+ }  
+  
+ . h u m a n i z e d   . e l e   {  
+         d i s p l a y :   n o n e ;   / *   H i d e   t h e   [ 1 ]   i n d e x   i n d i c a t o r s   w h e n   h u m a n i z e d   * /  
+ }  
+  
+ / *   A d j u s t   s e g m e n t   l a y o u t   f o r   h u m a n i z e d   v i e w   t o   h a n d l e   t a l l e r   i t e m s   * /  
+ . h u m a n i z e d   . s e g m e n t - n o d e   {  
+         a l i g n - i t e m s :   f l e x - s t a r t ;   / *   A l i g n   t o p   s i n c e   l a b e l s   a d d   h e i g h t   * /  
+ }  
+  
+ . h u m a n i z e d   . e l e - v a l - w r a p p e r   {  
+         d i s p l a y :   i n l i n e - f l e x ;  
+         f l e x - d i r e c t i o n :   c o l u m n ;  
+         m a r g i n - r i g h t :   0 . 8 r e m ;  
+         v e r t i c a l - a l i g n :   t o p ;  
+ }  
+ 

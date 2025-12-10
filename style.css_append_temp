@@ -1,0 +1,41 @@
+
+/* --- TYPEWRITER EFFECT --- */
+.typing-cursor {
+    display: inline-block;
+    width: 8px;
+    background-color: var(--accent-green);
+    animation: blink 1s step-end infinite;
+    margin-left: 2px;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* --- HUMANIZED EDI PARSER --- */
+.edi-label {
+    display: block;
+    font-size: 0.6rem;
+    color: var(--accent-orange);
+    text-transform: uppercase;
+    margin-bottom: 2px;
+    font-family: var(--font-sans);
+    letter-spacing: 0.5px;
+}
+
+.humanized .ele {
+    display: none; /* Hide the [1] index indicators when humanized */
+}
+
+/* Adjust segment layout for humanized view to handle taller items */
+.humanized .segment-node {
+    align-items: flex-start; /* Align top since labels add height */
+}
+
+.humanized .ele-val-wrapper {
+    display: inline-flex;
+    flex-direction: column;
+    margin-right: 0.8rem;
+    vertical-align: top;
+}
