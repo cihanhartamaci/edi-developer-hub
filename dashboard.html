@@ -165,6 +165,46 @@
         <!-- Recent Access Logs -->
         <section>
             <h2 class="mono-font" style="font-size: 1.5rem; margin-bottom: 1rem;">Recent Access Logs</h2>
+
+            <!-- Date Filter Controls -->
+            <div class="tech-card" style="padding: 1rem; margin-bottom: 1rem;">
+                <div
+                    style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between;">
+                    <!-- Quick Filters -->
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        <button id="filter-today" class="filter-btn active">
+                            <i class="fas fa-calendar-day"></i> Today
+                        </button>
+                        <button id="filter-week" class="filter-btn">
+                            <i class="fas fa-calendar-week"></i> This Week
+                        </button>
+                        <button id="filter-all" class="filter-btn">
+                            <i class="fas fa-calendar"></i> All Time
+                        </button>
+                    </div>
+
+                    <!-- Custom Date Range -->
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
+                        <label
+                            style="color: var(--text-secondary); font-size: 0.85rem; font-family: var(--font-mono);">Custom
+                            Range:</label>
+                        <input type="date" id="date-start" class="date-input" />
+                        <span style="color: var(--text-muted);">to</span>
+                        <input type="date" id="date-end" class="date-input" />
+                        <button id="apply-custom" class="filter-btn filter-btn-apply">
+                            <i class="fas fa-check"></i> Apply
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Results Counter -->
+                <div id="filter-results"
+                    style="margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--border-color); font-size: 0.85rem; color: var(--text-muted); font-family: var(--font-mono);">
+                    Showing <span id="filtered-count" style="color: var(--accent-blue); font-weight: 600;">0</span>
+                    results
+                </div>
+            </div>
+
             <div class="tech-card" style="padding: 1.5rem; overflow-x: auto;">
                 <table style="width: 100%; border-collapse: collapse;">
                     <thead>
@@ -259,6 +299,68 @@
             background: rgba(248, 81, 73, 0.1);
             color: #f85149;
             border-color: #f85149;
+        }
+
+        /* Filter Button Styles */
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--accent-blue);
+            color: var(--text-primary);
+        }
+
+        .filter-btn.active {
+            background: rgba(0, 149, 255, 0.15);
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+            font-weight: 600;
+        }
+
+        .filter-btn-apply {
+            background: rgba(0, 200, 83, 0.1);
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+        }
+
+        .filter-btn-apply:hover {
+            background: rgba(0, 200, 83, 0.2);
+        }
+
+        /* Date Input Styles */
+        .date-input {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .date-input:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .date-input::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            cursor: pointer;
         }
     </style>
 

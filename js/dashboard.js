@@ -11,6 +11,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 let unsubscribeSnapshot = null; // To stop listener on logout
 
+// Filter State
+let currentFilter = 'today'; // 'today', 'week', 'all', 'custom'
+let customStartDate = null;
+let customEndDate = null;
+let allVisits = []; // Store all visits for filtering
+
 function initAuth() {
     const overlay = document.getElementById('auth-overlay');
     const loginBtn = document.getElementById('login-btn');
@@ -26,6 +32,7 @@ function initAuth() {
             overlay.style.display = 'none';
             initRealtimeListener();
             initInboxListener();
+            initFilterControls();
         } else {
             console.log('Auth: User logged out');
             overlay.style.display = 'flex';
@@ -113,7 +120,13 @@ function initInboxListener() {
 }
 
 function updateDashboard(visits) {
-    // 1. Calculate Stats
+    // Store all visits for filtering
+    allVisits = visits;
+
+    // Apply current filter
+    const filteredVisits = applyDateFilter(visits);
+
+    // 1. Calculate Stats (use all visits, not filtered)
     document.getElementById('total-visits').textContent = visits.length + "+";
 
     const uniqueIPs = new Set(visits.map(v => v.ip)).size;
@@ -137,12 +150,20 @@ function updateDashboard(visits) {
     document.getElementById('top-country').textContent = topCountry;
     document.getElementById('last-active').textContent = lastActive;
 
-    // 3. Render Table
+    // Update filter count
+    document.getElementById('filtered-count').textContent = filteredVisits.length;
+
+    // 3. Render Table (use filtered visits)
     const tbody = document.getElementById('visits-table-body');
     if (tbody) {
         tbody.innerHTML = '';
 
-        visits.forEach(visit => {
+        if (filteredVisits.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="4" style="padding: 2rem; text-align: center; color: var(--text-muted);"><i class="fas fa-filter" style="font-size: 2rem; margin-bottom: 0.5rem; opacity: 0.5;"></i><br>No visits match the selected filter</td></tr>';
+            return;
+        }
+
+        filteredVisits.forEach(visit => {
             const row = document.createElement('tr');
             const dateStr = visit.timestamp.toLocaleString();
 
@@ -191,6 +212,112 @@ function updateInbox(messages) {
         `;
         tbody.appendChild(row);
     });
+}
+
+// Initialize Filter Controls
+function initFilterControls() {
+    const todayBtn = document.getElementById('filter-today');
+    const weekBtn = document.getElementById('filter-week');
+    const allBtn = document.getElementById('filter-all');
+    const applyBtn = document.getElementById('apply-custom');
+    const startInput = document.getElementById('date-start');
+    const endInput = document.getElementById('date-end');
+
+    // Quick filter buttons
+    todayBtn.addEventListener('click', () => {
+        currentFilter = 'today';
+        updateFilterButtons();
+        updateDashboard(allVisits);
+    });
+
+    weekBtn.addEventListener('click', () => {
+        currentFilter = 'week';
+        updateFilterButtons();
+        updateDashboard(allVisits);
+    });
+
+    allBtn.addEventListener('click', () => {
+        currentFilter = 'all';
+        updateFilterButtons();
+        updateDashboard(allVisits);
+    });
+
+    // Custom date range
+    applyBtn.addEventListener('click', () => {
+        const start = startInput.value;
+        const end = endInput.value;
+
+        if (!start || !end) {
+            alert('Please select both start and end dates');
+            return;
+        }
+
+        customStartDate = new Date(start);
+        customEndDate = new Date(end);
+        customEndDate.setHours(23, 59, 59, 999); // Include full end day
+
+        if (customStartDate > customEndDate) {
+            alert('Start date must be before end date');
+            return;
+        }
+
+        currentFilter = 'custom';
+        updateFilterButtons();
+        updateDashboard(allVisits);
+    });
+
+    // Set default filter to today
+    currentFilter = 'today';
+    updateFilterButtons();
+}
+
+// Update filter button active states
+function updateFilterButtons() {
+    const buttons = {
+        'today': document.getElementById('filter-today'),
+        'week': document.getElementById('filter-week'),
+        'all': document.getElementById('filter-all'),
+        'custom': document.getElementById('apply-custom')
+    };
+
+    Object.keys(buttons).forEach(key => {
+        if (buttons[key]) {
+            buttons[key].classList.remove('active');
+        }
+    });
+
+    if (buttons[currentFilter]) {
+        buttons[currentFilter].classList.add('active');
+    }
+}
+
+// Apply date filter to visits
+function applyDateFilter(visits) {
+    if (currentFilter === 'all') {
+        return visits;
+    }
+
+    const now = new Date();
+    let startDate;
+
+    if (currentFilter === 'today') {
+        // Last 24 hours
+        startDate = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+    } else if (currentFilter === 'week') {
+        // Last 7 days
+        startDate = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+    } else if (currentFilter === 'custom') {
+        // Custom range
+        if (!customStartDate || !customEndDate) {
+            return visits;
+        }
+        return visits.filter(visit => {
+            const visitDate = visit.timestamp;
+            return visitDate >= customStartDate && visitDate <= customEndDate;
+        });
+    }
+
+    return visits.filter(visit => visit.timestamp >= startDate);
 }
 
 function timeAgo(date) {
