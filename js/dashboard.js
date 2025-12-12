@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 let unsubscribeSnapshot = null; // To stop listener on logout
 
 // Filter State
-let currentFilter = 'today'; // 'today', 'week', 'all', 'custom'
+let currentFilter = 'all'; // 'today', 'week', 'all', 'custom' - default to 'all'
 let customStartDate = null;
 let customEndDate = null;
 let allVisits = []; // Store all visits for filtering
@@ -150,9 +150,6 @@ function updateDashboard(visits) {
     document.getElementById('top-country').textContent = topCountry;
     document.getElementById('last-active').textContent = lastActive;
 
-    // Update filter count
-    document.getElementById('filtered-count').textContent = filteredVisits.length;
-
     // 3. Render Table (use filtered visits)
     const tbody = document.getElementById('visits-table-body');
     if (tbody) {
@@ -266,8 +263,7 @@ function initFilterControls() {
         updateDashboard(allVisits);
     });
 
-    // Set default filter to today
-    currentFilter = 'today';
+    // Set default filter to all time (already set in state, just update UI)
     updateFilterButtons();
 }
 
