@@ -335,8 +335,10 @@ function applyDateFilter(visits) {
         let startDate;
 
         if (currentFilter === 'today') {
-            // Last 24 hours
-            startDate = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+            // From midnight today (local time) until now
+            const today = new Date();
+            startDate = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0, 0);
+            console.log('Today filter - start date:', startDate.toLocaleString());
         } else if (currentFilter === 'week') {
             // Last 7 days
             startDate = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
