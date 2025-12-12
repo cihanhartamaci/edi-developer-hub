@@ -249,9 +249,13 @@ function initFilterControls() {
             return;
         }
 
-        customStartDate = new Date(start);
-        customEndDate = new Date(end);
-        customEndDate.setHours(23, 59, 59, 999); // Include full end day
+        // Parse dates in local timezone (not UTC)
+        // Input format is "YYYY-MM-DD", we need to parse it as local time
+        const [startYear, startMonth, startDay] = start.split('-').map(Number);
+        const [endYear, endMonth, endDay] = end.split('-').map(Number);
+
+        customStartDate = new Date(startYear, startMonth - 1, startDay, 0, 0, 0, 0);
+        customEndDate = new Date(endYear, endMonth - 1, endDay, 23, 59, 59, 999);
 
         if (customStartDate > customEndDate) {
             alert('Start date must be before end date');
