@@ -287,6 +287,9 @@ a:hover {
     .top-nav {
         padding: 0.5rem 0;
         height: auto;
+        position: relative;
+        /* Remove sticky on mobile */
+        top: auto;
     }
 
     .nav-container {
@@ -310,6 +313,15 @@ a:hover {
         font-size: 0.8rem;
         padding: 0.5rem 0.75rem;
         height: auto;
+    }
+
+    /* Remove top padding from page content since nav is no longer sticky */
+    .page-header {
+        padding: 1.5rem 0 1.5rem;
+    }
+
+    .hero {
+        padding-top: 1rem;
     }
 
     /* Page Headers */
