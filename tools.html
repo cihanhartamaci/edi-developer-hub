@@ -4,12 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live EDI Tools | Cihan Hartamaci</title>
+    <title>Developer Tools | Cihan Hartamaci</title>
     <meta name="description"
-        content="Visual X12 and EDIFACT Parser. Analyze, format, and debug EDI files in your browser.">
-    <!-- Meta Tags -->
-    <meta property="og:title" content="EDI Tools // Cihan Hartamaci">
-    <meta property="og:description" content="Live X12/EDIFACT Parser and Analyzer.">
+        content="Suite of integration developer tools: EDI Parser, API Tester, Regex Tool, Cron Builder, and more.">
+    <meta property="og:title" content="Integration Tools // Cihan Hartamaci">
+    <meta property="og:description" content="Browser-based tools for EDI, API, and integration development.">
     <meta property="og:image" content="https://edi-developer-hub.netlify.app/assets/social-preview.png">
     <meta property="og:url" content="https://edi-developer-hub.netlify.app/tools.html">
     <meta name="twitter:card" content="summary_large_image">
@@ -22,18 +21,64 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <style>
+        /* Tab Navigation */
+        .tool-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin: 2rem 0 1rem 0;
+            border-bottom: 2px solid var(--border-color);
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+            margin-bottom: -2px;
+        }
+
+        .tab-btn:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .tab-btn.active {
+            color: var(--accent-blue);
+            border-bottom-color: var(--accent-blue);
+            background: rgba(47, 129, 247, 0.05);
+        }
+
+        /* Tool Panels */
+        .tool-panel {
+            display: none;
+        }
+
+        .tool-panel.active {
+            display: block;
+        }
+
         .tool-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 2rem;
             margin-top: 2rem;
-            height: 70vh;
+            min-height: 60vh;
         }
 
         @media (max-width: 768px) {
             .tool-container {
                 grid-template-columns: 1fr;
-                height: auto;
+            }
+
+            .tab-btn {
+                font-size: 0.75rem;
+                padding: 0.5rem 1rem;
             }
         }
 
@@ -47,16 +92,18 @@
 
         .editor-header {
             background: rgba(255, 255, 255, 0.05);
-            padding: 0.5rem 1rem;
+            padding: 0.75rem 1rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
         .editor-title {
             font-family: 'Fira Code', monospace;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
             text-transform: uppercase;
         }
@@ -69,17 +116,105 @@
             font-size: 0.9rem;
         }
 
-        textarea.raw-input {
+        textarea.tool-input,
+        input.tool-input,
+        select.tool-input {
             width: 100%;
-            height: 100%;
-            background: transparent;
-            border: none;
-            color: var(--text-main);
-            resize: none;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.75rem;
+            border-radius: 4px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            resize: vertical;
             outline: none;
+        }
+
+        textarea.tool-input {
+            min-height: 200px;
             line-height: 1.5;
         }
 
+        .tool-input:focus {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 2px rgba(47, 129, 247, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-family: var(--font-mono);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-family: var(--font-mono);
+        }
+
+        .status-success {
+            background: rgba(63, 185, 80, 0.2);
+            color: var(--accent-green);
+            border: 1px solid var(--accent-green);
+        }
+
+        .status-error {
+            background: rgba(248, 81, 73, 0.2);
+            color: var(--accent-red);
+            border: 1px solid var(--accent-red);
+        }
+
+        .status-loading {
+            background: rgba(210, 153, 34, 0.2);
+            color: var(--accent-orange);
+            border: 1px solid var(--accent-orange);
+        }
+
+        .regex-match {
+            background: rgba(63, 185, 80, 0.3);
+            color: var(--accent-green);
+            padding: 0.1rem 0.2rem;
+            border-radius: 2px;
+        }
+
+        .webhook-url {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 1rem;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            color: var(--accent-green);
+            word-break: break-all;
+            margin: 1rem 0;
+        }
+
+        .info-card {
+            background: rgba(47, 129, 247, 0.1);
+            border: 1px solid var(--accent-blue);
+            border-radius: 4px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .info-card h4 {
+            color: var(--accent-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        /* EDI Specific Styles */
         .tree-view {
             padding: 0;
         }
@@ -93,11 +228,11 @@
 
         .segment-node:hover {
             background: rgba(255, 255, 255, 0.02);
-            border-left-color: var(--primary);
+            border-left-color: var(--accent-blue);
         }
 
         .seg-id {
-            color: var(--primary);
+            color: var(--accent-blue);
             font-weight: bold;
             margin-right: 10px;
         }
@@ -110,11 +245,6 @@
         .ele-val {
             color: #ce9178;
         }
-
-        .btn-sm {
-            padding: 0.2rem 0.6rem;
-            font-size: 0.75rem;
-        }
     </style>
 </head>
 
@@ -126,7 +256,7 @@
             <div class="nav-links">
                 <a href="index.html" class="nav-link">Home</a>
                 <a href="patterns.html" class="nav-link">Patterns</a>
-                <a href="tools.html" class="nav-link active">Tools</a> <!-- New Page -->
+                <a href="tools.html" class="nav-link active">Tools</a>
                 <a href="insights.html" class="nav-link">Insights</a>
                 <a href="expertise.html" class="nav-link">Expertise</a>
                 <a href="contact.html" class="nav-link">Contact</a>
@@ -134,31 +264,40 @@
                     Dashboard</a>
             </div>
         </div>
-        </main>
+    </nav>
 
-        <main class="container">
-            <header class="page-header">
-                <h1 class="page-title">EDI X-Ray Tool</h1>
-                <p class="page-subtitle">Instant breakdown of ANSI X12 and EDIFACT messages.</p>
-            </header>
+    <main class="container">
+        <header class="page-header">
+            <h1 class="page-title">> DEVELOPER_TOOLS</h1>
+            <p class="page-subtitle">Browser-based utilities for integration development and debugging.</p>
+        </header>
 
+        <!-- Tab Navigation -->
+        <div class="tool-tabs">
+            <button class="tab-btn active" onclick="switchTool('edi-parser')">EDI Parser</button>
+            <button class="tab-btn" onclick="switchTool('api-tester')">API Tester</button>
+            <button class="tab-btn" onclick="switchTool('regex-tester')">Regex Tool</button>
+            <button class="tab-btn" onclick="switchTool('cron-builder')">Cron Builder</button>
+            <button class="tab-btn" onclick="switchTool('webhook-inspector')">Webhook Inspector</button>
+        </div>
+
+        <!-- EDI Parser Tool -->
+        <div id="edi-parser" class="tool-panel active">
             <div class="tool-container">
-                <!-- Left: Raw Input -->
                 <div class="editor-box">
                     <div class="editor-header">
-                        <span class="editor-title">Raw Payload</span>
-                        <div>
+                        <span class="editor-title">Raw EDI Payload</span>
+                        <div class="btn-group">
                             <button class="btn btn-outline btn-sm" onclick="loadSample('850')">Load 850</button>
                             <button class="btn btn-outline btn-sm" onclick="loadSample('DESADV')">Load DESADV</button>
                         </div>
                     </div>
                     <div class="editor-content">
-                        <textarea class="raw-input" id="edi-input"
+                        <textarea class="tool-input" id="edi-input" style="min-height: 100%;"
                             placeholder="Paste EDI segment string here... (ISA*00*... or UNA:+.?)"></textarea>
                     </div>
                 </div>
 
-                <!-- Right: Parsed Tree -->
                 <div class="editor-box">
                     <div class="editor-header">
                         <span class="editor-title">Segment Inspector</span>
@@ -176,13 +315,228 @@
                     </div>
                 </div>
             </div>
-        </main>
+        </div>
 
-        <!-- Scripts -->
-        <script src="js/cmd-palette.js"></script>
-        <script src="js/edi-parser.js"></script>
-        <script src="js/theme-manager.js"></script>
-        <script type="module" src="js/tracker.js"></script>
+        <!-- API Tester Tool -->
+        <div id="api-tester" class="tool-panel">
+            <div class="tool-container">
+                <div class="editor-box">
+                    <div class="editor-header">
+                        <span class="editor-title">Request Configuration</span>
+                        <div class="btn-group">
+                            <button class="btn btn-outline btn-sm" onclick="loadSampleAPI()">Load Sample</button>
+                            <button class="btn btn-primary btn-sm" onclick="sendAPIRequest()">Send Request</button>
+                            <button class="btn btn-outline btn-sm" onclick="copyCurl()">Copy cURL</button>
+                        </div>
+                    </div>
+                    <div class="editor-content">
+                        <div class="form-group">
+                            <label class="form-label">HTTP Method</label>
+                            <select id="api-method" class="tool-input">
+                                <option value="GET">GET</option>
+                                <option value="POST">POST</option>
+                                <option value="PUT">PUT</option>
+                                <option value="DELETE">DELETE</option>
+                                <option value="PATCH">PATCH</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">URL</label>
+                            <input type="text" id="api-url" class="tool-input"
+                                placeholder="https://api.example.com/endpoint">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Headers (one per line: Key: Value)</label>
+                            <textarea id="api-headers" class="tool-input" placeholder="Content-Type: application/json
+Authorization: Bearer token123"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Request Body (JSON, XML, etc.)</label>
+                            <textarea id="api-body" class="tool-input" placeholder='{"key": "value"}'></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="editor-box">
+                    <div class="editor-header">
+                        <span class="editor-title">Response</span>
+                        <span id="api-status" class="status-badge">Ready</span>
+                    </div>
+                    <div class="editor-content">
+                        <pre id="api-response"
+                            style="margin: 0; white-space: pre-wrap; word-wrap: break-word;">No response yet. Configure request and click "Send Request".</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Regex Tester Tool -->
+        <div id="regex-tester" class="tool-panel">
+            <div class="tool-container">
+                <div class="editor-box">
+                    <div class="editor-header">
+                        <span class="editor-title">Pattern Configuration</span>
+                        <div class="btn-group">
+                            <button class="btn btn-outline btn-sm" onclick="loadRegexPattern('email')">Email</button>
+                            <button class="btn btn-outline btn-sm" onclick="loadRegexPattern('url')">URL</button>
+                            <button class="btn btn-outline btn-sm" onclick="loadRegexPattern('date')">Date</button>
+                            <button class="btn btn-primary btn-sm" onclick="testRegex()">Test</button>
+                        </div>
+                    </div>
+                    <div class="editor-content">
+                        <div class="form-group">
+                            <label class="form-label">Regular Expression Pattern</label>
+                            <input type="text" id="regex-pattern" class="tool-input" placeholder="\d{3}-\d{2}-\d{4}">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Flags</label>
+                            <input type="text" id="regex-flags" class="tool-input" value="g"
+                                placeholder="g, i, m, etc.">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Test String</label>
+                            <textarea id="regex-test-string" class="tool-input"
+                                placeholder="Enter text to test against the pattern..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Match Details</label>
+                            <pre id="regex-matches"
+                                style="color: var(--text-secondary); font-size: 0.85rem;">No matches yet</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="editor-box">
+                    <div class="editor-header">
+                        <span class="editor-title">Highlighted Output</span>
+                    </div>
+                    <div class="editor-content">
+                        <pre id="regex-output"
+                            style="white-space: pre-wrap; word-wrap: break-word; line-height: 1.6;">Test string will appear here with matches highlighted</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cron Builder Tool -->
+        <div id="cron-builder" class="tool-panel">
+            <div class="tool-container">
+                <div class="editor-box">
+                    <div class="editor-header">
+                        <span class="editor-title">Schedule Configuration</span>
+                        <div class="btn-group">
+                            <button class="btn btn-outline btn-sm" onclick="loadCronPreset('hourly')">Hourly</button>
+                            <button class="btn btn-outline btn-sm" onclick="loadCronPreset('daily')">Daily</button>
+                            <button class="btn btn-outline btn-sm" onclick="loadCronPreset('weekly')">Weekly</button>
+                            <button class="btn btn-primary btn-sm" onclick="updateCronExpression()">Update</button>
+                            <button class="btn btn-outline btn-sm" onclick="copyCronExpression()">Copy</button>
+                        </div>
+                    </div>
+                    <div class="editor-content">
+                        <div class="form-group">
+                            <label class="form-label">Minute (0-59, * for every minute)</label>
+                            <input type="text" id="cron-minute" class="tool-input" placeholder="*"
+                                oninput="updateCronExpression()">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Hour (0-23, * for every hour)</label>
+                            <input type="text" id="cron-hour" class="tool-input" placeholder="*"
+                                oninput="updateCronExpression()">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Day of Month (1-31, * for every day)</label>
+                            <input type="text" id="cron-day" class="tool-input" placeholder="*"
+                                oninput="updateCronExpression()">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Month (1-12, * for every month)</label>
+                            <input type="text" id="cron-month" class="tool-input" placeholder="*"
+                                oninput="updateCronExpression()">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Day of Week (0-6, 0=Sunday, * for every day)</label>
+                            <input type="text" id="cron-weekday" class="tool-input" placeholder="*"
+                                oninput="updateCronExpression()">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="editor-box">
+                    <div class="editor-header">
+                        <span class="editor-title">Generated Expression</span>
+                    </div>
+                    <div class="editor-content">
+                        <div class="form-group">
+                            <label class="form-label">Cron Expression</label>
+                            <div class="webhook-url" id="cron-expression">* * * * *</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Plain English</label>
+                            <div id="cron-description" style="color: var(--text-secondary); font-size: 0.95rem;">Every
+                                minute</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Next 5 Runs (Approximate)</label>
+                            <div id="cron-next-runs"
+                                style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.8;">
+                                Calculating...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Webhook Inspector Tool -->
+        <div id="webhook-inspector" class="tool-panel">
+            <div class="info-card">
+                <h4><i class="fas fa-info-circle"></i> Webhook Inspector - Server Required</h4>
+                <p style="color: var(--text-secondary); line-height: 1.7;">
+                    A webhook inspector requires a backend server to receive and store HTTP requests.
+                    Since this is a static site, this tool is not available in the browser.
+                </p>
+                <p style="margin-top: 1rem; color: var(--text-secondary); line-height: 1.7;">
+                    <strong style="color: var(--accent-blue);">Recommended alternatives:</strong>
+                </p>
+                <ul style="margin-left: 1.5rem; color: var(--text-secondary); line-height: 1.8;">
+                    <li><strong style="color: var(--accent-green);">webhook.site</strong> - Free webhook testing and
+                        inspection</li>
+                    <li><strong style="color: var(--accent-green);">requestbin.com</strong> - HTTP request capture and
+                        inspection</li>
+                    <li><strong style="color: var(--accent-green);">ngrok.com</strong> - Tunnel localhost for webhook
+                        testing</li>
+                </ul>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Scripts -->
+    <script>
+        // Tab Switching
+        function switchTool(toolId) {
+            // Hide all panels
+            document.querySelectorAll('.tool-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            // Remove active from all tabs
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected panel
+            document.getElementById(toolId).classList.add('active');
+            // Mark tab as active
+            event.target.classList.add('active');
+        }
+    </script>
+    <script src="js/cmd-palette.js"></script>
+    <script src="js/edi-parser.js"></script>
+    <script src="js/api-tester.js"></script>
+    <script src="js/regex-tester.js"></script>
+    <script src="js/cron-builder.js"></script>
+    <script src="js/theme-manager.js"></script>
+    <script type="module" src="js/tracker.js"></script>
 </body>
 
 </html>
