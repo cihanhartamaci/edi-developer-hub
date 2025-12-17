@@ -192,7 +192,8 @@ a:hover {
     justify-content: center;
     height: 36px;
     padding: 0 1rem;
-    margin-left: 1rem;
+    margin-left: 3rem;
+    /* Comparison: Increased from 1rem to 3rem for "far right" push */
     border: 1px solid var(--text-secondary);
     border-radius: 4px;
     white-space: nowrap !important;
