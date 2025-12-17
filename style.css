@@ -177,30 +177,6 @@ a:hover {
     color: var(--text-primary);
 }
 
-.nav-btn-switch {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 36px;
-    padding: 0 1rem;
-    margin-left: 1rem;
-    border: 1px solid var(--text-secondary);
-    border-radius: 4px;
-    white-space: nowrap;
-    color: var(--text-secondary);
-    font-size: 0.85rem;
-    transition: all 0.2s ease;
-    align-self: center;
-    /* Ensure vertical alignment in flex nav */
-}
-
-.nav-btn-switch:hover {
-    border-color: var(--accent-blue);
-    color: var(--accent-blue);
-    background: rgba(47, 129, 247, 0.1);
-    text-decoration: none;
-}
-
 /* Page Headers */
 .page-header {
     padding: 4rem 0 2rem;
