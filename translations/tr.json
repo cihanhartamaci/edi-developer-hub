@@ -64,7 +64,21 @@
                 "h2": "Sayfalandırma ve Filtreleme"
             },
             "event": {
-                "title": "Olay Güdümlü Entegrasyon: Yayınla/Abone Ol ve Mesaj Kuyruğu Desenleri"
+                "title": "Olay Güdümlü Entegrasyon: Pub/Sub ve Mesaj Kuyruğu Desenleri",
+                "p1": "Olay güdümlü mimariler, dağıtık sistemler genelinde gevşek bağlılık ve gerçek zamanlı veri senkronizasyonu sağlar. Yayınla/abone ol ile mesaj kuyruklarını ne zaman kullanacağınızı anlamak çok önemlidir.",
+                "h1": "Yayınla/Abone Ol Deseni (Çoklu Tüketici)",
+                "design_p1_title": "CloudEvents Standartı:",
+                "design_p1_desc": "Standartlaştırılmış zarf formatı kullanın",
+                "design_p2_title": "Şema Kaydı:",
+                "design_p2_desc": "Olay yüklerini versiyonlayın ve doğrulayın",
+                "design_p3_title": "Olay Kaynak Kullanımı:",
+                "design_p3_desc": "Olayları sistem durumu için tek gerçek kaynağı olarak saklayın"
+            },
+            "transformation": {
+                "p1": "Eski sistemler ile modern API'ler arasında köprü kurmak, gelişmiş veri dönüştürme mantığı gerektirir. Bu stratejiler, veri bütünlüğünü sağlarken teknik borcu en aza indirir."
+            },
+            "error": {
+                "p3": "Entegrasyonları yinelenen mesajları güvenli bir şekilde işleyecek şekilde tasarlayın. İşlenen mesaj kimliklerini bir önbellekte/veritabanında saklayın ve zaten işlenmiş olan mesajları atlayın. Bu, veri bozulması olmadan güvenli yeniden denemeler yapılmasını sağlar."
             }
         }
     },
@@ -80,12 +94,19 @@
         },
         "edi": {
             "input_title": "Ham EDI Verisi",
+            "btn_850": "850 Yükle",
+            "btn_desadv": "DESADV Yükle",
             "placeholder": "EDI segment dizisini buraya yapıştırın... (ISA*00*... veya UNA:+.?)",
             "output_title": "Segment Denetçisi",
+            "format_unknown": "FORMAT: BİLİNMİYOR",
+            "btn_humanize": "İyileştir",
             "waiting": "Giriş akışı bekleniyor..."
         },
         "api": {
             "config_title": "İstek Yapılandırması",
+            "btn_sample": "Örnek Yükle",
+            "btn_send": "İstek Gönder",
+            "btn_curl": "cURL Kopyala",
             "method_label": "HTTP Metodu",
             "url_label": "URL",
             "headers_label": "Başlıklar (her satırda bir: Anahtar: Değer)",
@@ -107,6 +128,9 @@
             "btn_copy": "Kopyala",
             "minute_label": "Dakika (0-59, * her dakika için)",
             "hour_label": "Saat (0-23, * her saat için)",
+            "day_label": "Ayın Günü (1-31, * her gün için)",
+            "month_label": "Ay (1-12, * her ay için)",
+            "weekday_label": "Haftanın Günü (0-6, 0=Pazar, * her gün için)",
             "output_title": "Oluşturulan İfade"
         },
         "webhook": {
@@ -138,7 +162,29 @@
             "dev": "Geliştirme",
             "method": "Metodolojiler"
         },
-        "gitLog": "git log --oneline"
+        "gitLog": "git log --oneline",
+        "history": {
+            "logiwa": {
+                "title": "Kıdemli Entegrasyon Mühendisi @ Logiwa",
+                "date": "Mayıs 2024 - Günümüz",
+                "desc": "EDI ve API entegrasyon stratejilerine öncülük ediyorum. WMS için elektronik veri değişimi akışlarını yönetiyorum."
+            },
+            "beko": {
+                "title": "Kıdemli EDI/SAP/API Geliştirici @ Beko",
+                "date": "Temmuz 2022 - Mayıs 2024",
+                "desc": "SAP entegrasyonu ve API geliştirmeye odaklanan çevik projelere liderlik ettim.<br><span style=\"color:var(--text-secondary); font-size:0.9em;\">> Önceki Görev: Uzman - IT Ortak Araçlar (Ocak 2022 - Haziran 2022)</span>"
+            },
+            "map": {
+                "title": "Entegrasyon Mühendisi @ Map E-Ticaret",
+                "date": "Eylül 2020 - Aralık 2021",
+                "desc": "MySQL veritabanı yönetimi ve veri boru hatlarına odaklandım."
+            },
+            "freelance": {
+                "title": "Entegrasyon Uzmanı (Freelance) @ Map",
+                "date": "Ağustos 2019 - Ağustos 2020",
+                "desc": "Özel entegrasyon çözümleri sundum. Kariyerime Stajyer (Ağustos 2019) olarak başladım."
+            }
+        }
     },
     "contact": {
         "title": "> PROTOKOLU_BAŞLAT",

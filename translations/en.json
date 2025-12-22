@@ -49,7 +49,38 @@
         "hybrid": {
             "title": "Hybrid Data Sync"
         },
-        "insights_title": "> INTEGRATION_INSIGHTS"
+        "insights_title": "> INTEGRATION_INSIGHTS",
+        "articles": {
+            "design": {
+                "title": "EDI Transaction Set Design: Best Practices for X12 & EDIFACT",
+                "p1": "Proper EDI transaction set design is critical for ensuring interoperability between trading partners. Here are proven strategies for building robust EDI implementations.",
+                "h1": "1. Standardize Over Customize",
+                "p2": "While X12 and EDIFACT standards allow for optional segments and elements, resist the urge to create highly customized transaction sets. Stick to industry-standard implementation guides whenever possible.",
+                "h3": "4. Error Handling Best Practices"
+            },
+            "api": {
+                "title": "RESTful API Design Patterns for Integration Platforms",
+                "h1": "Resource-Oriented Design",
+                "h2": "Pagination & Filtering"
+            },
+            "event": {
+                "title": "Event-Driven Integration: Pub/Sub vs. Message Queue Patterns",
+                "p1": "Event-driven architectures enable loose coupling and real-time data synchronization across distributed systems. Understanding when to use publish/subscribe vs. message queues is crucial.",
+                "h1": "Pub/Sub Pattern (Many Consumers)",
+                "design_p1_title": "CloudEvents Standard:",
+                "design_p1_desc": "Use standardized envelope format",
+                "design_p2_title": "Schema Registry:",
+                "design_p2_desc": "Version and validate event payloads",
+                "design_p3_title": "Event Sourcing:",
+                "design_p3_desc": "Store events as source of truth for system state"
+            },
+            "transformation": {
+                "p1": "Bridging legacy systems and modern APIs requires sophisticated data transformation logic. These strategies minimize technical debt while ensuring data integrity."
+            },
+            "error": {
+                "p3": "Design integrations to handle duplicate messages safely. Store processed message IDs in a cache/database and skip already-processed messages. This enables safe retries without data corruption."
+            }
+        }
     },
     "tools": {
         "title": "> DEVELOPER_TOOLS",
@@ -63,12 +94,19 @@
         },
         "edi": {
             "input_title": "Raw EDI Payload",
+            "btn_850": "Load 850",
+            "btn_desadv": "Load DESADV",
             "placeholder": "Paste EDI segment string here... (ISA*00*... or UNA:+.?)",
             "output_title": "Segment Inspector",
+            "format_unknown": "FORMAT: UNKNOWN",
+            "btn_humanize": "Humanize",
             "waiting": "Waiting for input stream..."
         },
         "api": {
             "config_title": "Request Configuration",
+            "btn_sample": "Load Sample",
+            "btn_send": "Send Request",
+            "btn_curl": "Copy cURL",
             "method_label": "HTTP Method",
             "url_label": "URL",
             "headers_label": "Headers (one per line: Key: Value)",
@@ -80,6 +118,24 @@
         },
         "regex": {
             "pattern_label": "Regular Expression Pattern"
+        },
+        "cron": {
+            "config_title": "Schedule Configuration",
+            "btn_hourly": "Hourly",
+            "btn_daily": "Daily",
+            "btn_weekly": "Weekly",
+            "btn_update": "Update",
+            "btn_copy": "Copy",
+            "minute_label": "Minute (0-59, * for every minute)",
+            "hour_label": "Hour (0-23, * for every hour)",
+            "day_label": "Day of Month (1-31, * for every day)",
+            "month_label": "Month (1-12, * for every month)",
+            "weekday_label": "Day of Week (0-6, 0=Sunday, * for every day)",
+            "output_title": "Generated Expression"
+        },
+        "webhook": {
+            "title": "Webhook Inspector - Server Required",
+            "desc": "A webhook inspector requires a backend server to receive and store HTTP requests. Since this is a static site, this tool is not available in the browser."
         }
     },
     "insights": {
@@ -106,7 +162,29 @@
             "dev": "Development",
             "method": "Methodologies"
         },
-        "gitLog": "git log --oneline"
+        "gitLog": "git log --oneline",
+        "history": {
+            "logiwa": {
+                "title": "Senior Integration Engineer @ Logiwa",
+                "date": "May 2024 - Present",
+                "desc": "Spearheading EDI and API integration strategies. Managing electronic data interchange flows for WMS."
+            },
+            "beko": {
+                "title": "Senior EDI/SAP/API Dev @ Beko",
+                "date": "Jul 2022 - May 2024",
+                "desc": "Led agile projects focused on SAP integration and API development.<br><span style=\"color:var(--text-secondary); font-size:0.9em;\">> Previously: Specialist - IT Common Tools (Jan 2022 - Jun 2022)</span>"
+            },
+            "map": {
+                "title": "Integration Engineer @ Map E-Commerce",
+                "date": "Sep 2020 - Dec 2021",
+                "desc": "Focused on MySQL database management and data pipelines."
+            },
+            "freelance": {
+                "title": "Integration Specialist (Freelance) @ Map",
+                "date": "Aug 2019 - Aug 2020",
+                "desc": "Delivered custom integration solutions. Started career as an Intern (Aug 2019)."
+            }
+        }
     },
     "contact": {
         "title": "> INITIALIZE_PROTOCOL",

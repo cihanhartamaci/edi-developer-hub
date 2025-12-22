@@ -33,7 +33,7 @@
                     Professional</a>
                 <div class="lang-switcher">
                     <select id="language-selector">
-                        <option value="en">🇬🇧 English</option>
+                        <option value="en">🇺🇸 English</option>
                         <option value="tr">🇹🇷 Türkçe</option>
                     </select>
                 </div>
@@ -76,9 +76,10 @@
             <div class="blog-grid">
                 <!-- Blog Post 1 - New -->
                 <article class="blog-card">
-                    <p class="blog-meta">December 22, 2025</p>
-                    <h3 class="blog-title"><a href="posts/moments-that-matter.html">Moments That Matter</a></h3>
-                    <p class="blog-excerpt">
+                    <p class="blog-meta" data-i18n="blog.moments.date">December 22, 2025</p>
+                    <h3 class="blog-title"><a href="posts/moments-that-matter.html"
+                            data-i18n="blog.moments.title">Moments That Matter</a></h3>
+                    <p class="blog-excerpt" data-i18n="blog.moments.excerpt">
                         Reflections on friendship, travel dreams, and finding balance in a fast-paced world.
                         Sometimes the best moments happen when you're not optimizing anything at all.
                     </p>
@@ -87,9 +88,10 @@
 
                 <!-- Blog Post 2 -->
                 <article class="blog-card">
-                    <p class="blog-meta">December 17, 2025</p>
-                    <h3 class="blog-title"><a href="posts/welcome.html">Welcome to the New Setup</a></h3>
-                    <p class="blog-excerpt">
+                    <p class="blog-meta" data-i18n="blog.welcome.date">December 17, 2025</p>
+                    <h3 class="blog-title"><a href="posts/welcome.html" data-i18n="blog.welcome.title">Welcome to the
+                            New Setup</a></h3>
+                    <p class="blog-excerpt" data-i18n="blog.welcome.excerpt">
                         Separating my professional work from my personal interests was a necessary step.
                         Here's why I decided to build a dual-mode website.
                     </p>
@@ -98,12 +100,13 @@
 
                 <!-- Placeholder Post 2 -->
                 <article class="blog-card">
-                    <p class="blog-meta">December 10, 2025</p>
-                    <h3 class="blog-title">Tech & Balance</h3>
-                    <p class="blog-excerpt">
+                    <p class="blog-meta" data-i18n="blog.workflow.date">December 10, 2025</p>
+                    <h3 class="blog-title" data-i18n="blog.workflow.title">Workflow Optimization</h3>
+                    <p class="blog-excerpt" data-i18n="blog.workflow.excerpt">
                         Finding the right balance between high-intensity coding sessions and unplugged life.
                     </p>
-                    <span class="btn-read" style="color:#ccc; cursor:not-allowed;">Coming Soon</span>
+                    <span class="btn-read" style="color:#ccc; cursor:not-allowed;" data-i18n="comingSoon">Coming
+                        Soon</span>
                 </article>
             </div>
         </section>
@@ -114,7 +117,7 @@
         &copy; 2025 Cihan Hartamaci.
     </footer>
 
-    <script src="js/i18n.js"></script>
+    <script src="../js/i18n.js"></script>
     <script>
         // Initialize i18n
         i18n.init('en', 'translations/');

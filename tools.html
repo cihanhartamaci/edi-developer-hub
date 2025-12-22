@@ -267,7 +267,7 @@
                     Personal</a>
                 <div class="lang-switcher">
                     <select id="language-selector">
-                        <option value="en">🇬🇧 English</option>
+                        <option value="en">🇺🇸 English</option>
                         <option value="tr">🇹🇷 Türkçe</option>
                     </select>
                 </div>
@@ -302,8 +302,10 @@
                     <div class="editor-header">
                         <span class="editor-title" data-i18n="tools.edi.input_title">Raw EDI Payload</span>
                         <div class="btn-group">
-                            <button class="btn btn-outline btn-sm" onclick="loadSample('850')">Load 850</button>
-                            <button class="btn btn-outline btn-sm" onclick="loadSample('DESADV')">Load DESADV</button>
+                            <button class="btn btn-outline btn-sm" onclick="loadSample('850')"
+                                data-i18n="tools.edi.btn_850">Load 850</button>
+                            <button class="btn btn-outline btn-sm" onclick="loadSample('DESADV')"
+                                data-i18n="tools.edi.btn_desadv">Load DESADV</button>
                         </div>
                     </div>
                     <div class="editor-content">
@@ -317,8 +319,10 @@
                     <div class="editor-header">
                         <span class="editor-title" data-i18n="tools.edi.output_title">Segment Inspector</span>
                         <div style="display: flex; gap: 1rem; align-items: center;">
-                            <span class="editor-title" id="detected-format">FORMAT: UNKNOWN</span>
-                            <button id="btn-humanize" class="btn btn-outline btn-sm" onclick="toggleHumanize()">
+                            <span class="editor-title" id="detected-format" data-i18n="tools.edi.format_unknown">FORMAT:
+                                UNKNOWN</span>
+                            <button id="btn-humanize" class="btn btn-outline btn-sm" onclick="toggleHumanize()"
+                                data-i18n="tools.edi.btn_humanize">
                                 <i class="fas fa-magic"></i> Humanize
                             </button>
                         </div>
@@ -340,9 +344,12 @@
                     <div class="editor-header">
                         <span class="editor-title" data-i18n="tools.api.config_title">Request Configuration</span>
                         <div class="btn-group">
-                            <button class="btn btn-outline btn-sm" onclick="loadSampleAPI()">Load Sample</button>
-                            <button class="btn btn-primary btn-sm" onclick="sendAPIRequest()">Send Request</button>
-                            <button class="btn btn-outline btn-sm" onclick="copyCurl()">Copy cURL</button>
+                            <button class="btn btn-outline btn-sm" onclick="loadSampleAPI()"
+                                data-i18n="tools.api.btn_sample">Load Sample</button>
+                            <button class="btn btn-primary btn-sm" onclick="sendAPIRequest()"
+                                data-i18n="tools.api.btn_send">Send Request</button>
+                            <button class="btn btn-outline btn-sm" onclick="copyCurl()"
+                                data-i18n="tools.api.btn_curl">Copy cURL</button>
                         </div>
                     </div>
                     <div class="editor-content">
@@ -473,17 +480,20 @@ Authorization: Bearer token123"></textarea>
                                 oninput="updateCronExpression()">
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Day of Month (1-31, * for every day)</label>
+                            <label class="form-label" data-i18n="tools.cron.day_label">Day of Month (1-31, * for every
+                                day)</label>
                             <input type="text" id="cron-day" class="tool-input" placeholder="*"
                                 oninput="updateCronExpression()">
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Month (1-12, * for every month)</label>
+                            <label class="form-label" data-i18n="tools.cron.month_label">Month (1-12, * for every
+                                month)</label>
                             <input type="text" id="cron-month" class="tool-input" placeholder="*"
                                 oninput="updateCronExpression()">
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Day of Week (0-6, 0=Sunday, * for every day)</label>
+                            <label class="form-label" data-i18n="tools.cron.weekday_label">Day of Week (0-6, 0=Sunday, *
+                                for every day)</label>
                             <input type="text" id="cron-weekday" class="tool-input" placeholder="*"
                                 oninput="updateCronExpression()">
                         </div>

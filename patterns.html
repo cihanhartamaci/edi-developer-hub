@@ -35,7 +35,7 @@
                     Personal</a>
                 <div class="lang-switcher">
                     <select id="language-selector">
-                        <option value="en">🇬🇧 English</option>
+                        <option value="en">🇺🇸 English</option>
                         <option value="tr">🇹🇷 Türkçe</option>
                     </select>
                 </div>
@@ -305,13 +305,15 @@ Headers:
                     <span class="mono-tag">ARCHITECTURE</span>
                 </div>
 
-                <p style="color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.8;">
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.8;"
+                    data-i18n="patterns.articles.event.p1">
                     Event-driven architectures enable loose coupling and real-time data synchronization across
                     distributed systems.
                     Understanding when to use publish/subscribe vs. message queues is crucial.
                 </p>
 
-                <h4 style="color: var(--accent-orange); margin-top: 1.5rem; margin-bottom: 0.75rem; font-size: 1.1rem;">
+                <h4 style="color: var(--accent-orange); margin-top: 1.5rem; margin-bottom: 0.75rem; font-size: 1.1rem;"
+                    data-i18n="patterns.articles.event.h1">
                     Pub/Sub Pattern (Many Consumers)</h4>
                 <p style="line-height: 1.7; margin-bottom: 1rem;">
                     Use publish/subscribe when multiple independent services need to react to the same event:
@@ -341,12 +343,18 @@ Message: { orderId: 123, amount: 99.99 }
                 <h4 style="color: var(--accent-orange); margin-top: 1.5rem; margin-bottom: 0.75rem; font-size: 1.1rem;">
                     Event Schema Design</h4>
                 <ul style="margin-left: 1.5rem; line-height: 1.8;">
-                    <li><strong style="color: var(--accent-green);">CloudEvents Standard:</strong> Use standardized
-                        envelope format</li>
-                    <li><strong style="color: var(--accent-green);">Schema Registry:</strong> Version and validate event
-                        payloads</li>
-                    <li><strong style="color: var(--accent-green);">Event Sourcing:</strong> Store events as source of
-                        truth for system state</li>
+                    <li><strong style="color: var(--accent-green);"
+                            data-i18n="patterns.articles.event.design_p1_title">CloudEvents Standard:</strong> <span
+                            data-i18n="patterns.articles.event.design_p1_desc">Use standardized envelope format</span>
+                    </li>
+                    <li><strong style="color: var(--accent-green);"
+                            data-i18n="patterns.articles.event.design_p2_title">Schema Registry:</strong> <span
+                            data-i18n="patterns.articles.event.design_p2_desc">Version and validate event
+                            payloads</span></li>
+                    <li><strong style="color: var(--accent-green);"
+                            data-i18n="patterns.articles.event.design_p3_title">Event Sourcing:</strong> <span
+                            data-i18n="patterns.articles.event.design_p3_desc">Store events as source of truth for
+                            system state</span></li>
                 </ul>
             </article>
 
@@ -358,7 +366,8 @@ Message: { orderId: 123, amount: 99.99 }
                     <span class="mono-tag">DATA MAPPING</span>
                 </div>
 
-                <p style="color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.8;">
+                <p style="color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.8;"
+                    data-i18n="patterns.articles.transformation.p1">
                     Bridging legacy systems and modern APIs requires sophisticated data transformation logic.
                     These strategies minimize technical debt while ensuring data integrity.
                 </p>
@@ -468,7 +477,7 @@ Logging Strategy:
 
                 <h4 style="color: var(--accent-orange); margin-top: 1.5rem; margin-bottom: 0.75rem; font-size: 1.1rem;">
                     Idempotent Processing</h4>
-                <p style="line-height: 1.7;">
+                <p style="line-height: 1.7;" data-i18n="patterns.articles.error.p3">
                     Design integrations to handle duplicate messages safely. Store processed message IDs in a
                     cache/database
                     and skip already-processed messages. This enables safe retries without data corruption.

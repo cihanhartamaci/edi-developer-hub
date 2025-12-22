@@ -21,6 +21,7 @@
         "welcome": {
             "title": "Yeni Kuruluma Hoş Geldiniz",
             "excerpt": "Profesyonel işimi kişisel ilgi alanlarımdan ayırmak gerekli bir adımdı. İşte neden çift modlu bir web sitesi kurmaya karar verdiğim.",
+            "date": "17 Aralık 2025",
             "p1": "Uzun süre her şeyi tek bir dijital kimliğe sığdırmaya çalıştım. Bir EDI Entegrasyon Mimarı olarak profesyonel işim belirli bir hassasiyet, teknik derinlik ve açıkçası biraz ciddi bir yüz gerektiriyor.",
             "p2": "Ama ben sadece bundan ibaret değilim. Yaşam tarzı, teknoloji trendleri ve sosyal medya gibi her zaman bir 'Geliştirici Portalı' estetiğine uymayan ilgi alanlarım da var.",
             "h2": "Çift Mod Çözümü",
@@ -33,6 +34,7 @@
             "title": "Önemli Anlar",
             "subtitle": "Dostluk, seyahat hayalleri ve dengeyi bulma üzerine düşünceler",
             "excerpt": "Dostluk, seyahat hayalleri ve hızlı dünyada dengeyi bulma üzerine düşünceler.",
+            "date": "22 Aralık 2025",
             "p1": "Ekranlardan ve kod satırlarından uzaklaşmanın özgürleştirici bir tarafı var. Günlerimin çoğunu karmaşık sistemler tasarlayarak ve entegrasyon akışlarındaki hataları gidererek geçiren biri olarak, en iyi anların genellikle hiçbir şeyi optimize etmediğiniz zamanlarda gerçekleştiğini öğrendim.",
             "p2": "Sadece var olmak. Sadece orada olmak.",
             "h2a": "Dünya Bekliyor",
@@ -54,7 +56,8 @@
         },
         "workflow": {
             "title": "İş Akışı Optimizasyonu",
-            "excerpt": "Tükenmişlik yaşamadan üretken kalmak için kullandığım araçlar."
+            "excerpt": "Tükenmişlik yaşamadan üretken kalmak için kullandığım araçlar.",
+            "date": "10 Aralık 2025"
         }
     },
     "footer": "© 2025 Cihan Hartamaci."

@@ -6,6 +6,7 @@
         currentLang: 'en',
         translations: {},
         fallbackLang: 'en',
+        basePath: '/translations/',
 
         // Initialize i18n
         init: function (defaultLang = 'en', basePath = '/translations/') {
@@ -26,14 +27,19 @@
                 initialLang = browserLang;
             }
 
+            // Immediately set currentLang and sync selector to prevent visual reset
+            this.currentLang = initialLang;
+            this.syncSelector();
+
             return this.loadLanguage(initialLang);
         },
 
         // Load translation file
         loadLanguage: function (lang) {
-            return fetch(this.basePath + lang + '.json')
+            const url = this.basePath + lang + '.json';
+            return fetch(url)
                 .then(response => {
-                    if (!response.ok) throw new Error('Translation file not found');
+                    if (!response.ok) throw new Error(`Translation file not found: ${url}`);
                     return response.json();
                 })
                 .then(translations => {
@@ -44,10 +50,7 @@
                     this.updateHtmlLang();
 
                     // Update selector if it exists
-                    const langSelector = document.getElementById('language-selector');
-                    if (langSelector) {
-                        langSelector.value = lang;
-                    }
+                    this.syncSelector();
 
                     return lang;
                 })
@@ -65,24 +68,37 @@
             const keys = key.split('.');
             let value = this.translations[lang];
 
+            if (!value) return key;
+
+            let current = value;
+            let found = true;
             for (let k of keys) {
-                if (value && value.hasOwnProperty(k)) {
-                    value = value[k];
+                if (current && current.hasOwnProperty(k)) {
+                    current = current[k];
                 } else {
-                    // Fallback to default language
-                    value = this.translations[this.fallbackLang];
-                    for (let k of keys) {
-                        if (value && value.hasOwnProperty(k)) {
-                            value = value[k];
-                        } else {
-                            return key; // Return key if not found
-                        }
-                    }
+                    found = false;
                     break;
                 }
             }
 
-            return value || key;
+            if (found && current !== undefined) return current;
+
+            // Fallback to default language
+            let fallbackValue = this.translations[this.fallbackLang];
+            if (!fallbackValue || lang === this.fallbackLang) return key;
+
+            let fallbackCurrent = fallbackValue;
+            let fallbackFound = true;
+            for (let f of keys) {
+                if (fallbackCurrent && fallbackCurrent.hasOwnProperty(f)) {
+                    fallbackCurrent = fallbackCurrent[f];
+                } else {
+                    fallbackFound = false;
+                    break;
+                }
+            }
+
+            return (fallbackFound && fallbackCurrent !== undefined) ? fallbackCurrent : key;
         },
 
         // Apply translations to DOM
@@ -122,8 +138,10 @@
                 const key = elem.getAttribute('data-i18n-aria');
                 elem.setAttribute('aria-label', this.t(key));
             });
+        },
 
-            // Sync selector value again just in case
+        // Sync selector value
+        syncSelector: function () {
             const langSelector = document.getElementById('language-selector');
             if (langSelector) {
                 langSelector.value = this.currentLang;
@@ -142,6 +160,7 @@
                 localStorage.setItem('preferredLanguage', lang);
                 this.applyTranslations();
                 this.updateHtmlLang();
+                this.syncSelector();
 
                 // Trigger custom event
                 window.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang } }));
@@ -165,14 +184,23 @@
     window.i18n = i18n;
 
     // Auto-initialize language selector if exists
-    document.addEventListener('DOMContentLoaded', function () {
+    function initSelector() {
         const langSelector = document.getElementById('language-selector');
         if (langSelector) {
             langSelector.value = i18n.getCurrentLanguage();
-            langSelector.addEventListener('change', function (e) {
-                i18n.changeLanguage(e.target.value);
-            });
+            langSelector.removeEventListener('change', onLanguageChange);
+            langSelector.addEventListener('change', onLanguageChange);
         }
-    });
+    }
+
+    function onLanguageChange(e) {
+        i18n.changeLanguage(e.target.value);
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initSelector);
+    } else {
+        initSelector();
+    }
 
 })(window);
