@@ -22,7 +22,12 @@
     <nav class="top-nav">
         <div class="container nav-container">
             <a href="index.html" class="logo">CH.integrate()</a>
-            <div class="nav-links">
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-links" id="navLinks">
                 <a href="index.html" class="nav-link" data-i18n="nav.home">Home</a>
                 <a href="patterns.html" class="nav-link active" data-i18n="nav.patterns">Patterns</a>
                 <a href="tools.html" class="nav-link" data-i18n="nav.tools">Tools</a>
@@ -539,6 +544,7 @@ Logging Strategy:
         }
     </script>
     <script src="js/i18n.js"></script>
+    <script src="js/mobile-nav.js" defer></script>
     <script>
         i18n.init('en', 'translations/');
     </script>
