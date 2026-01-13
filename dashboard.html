@@ -61,349 +61,353 @@
 
                 <!-- Sağ Taraf: Navigasyon ve Theme Selector -->
                 <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 0.5rem;">
-                    <div id="user-identity" style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono); display: none;">
-                        <i class="fas fa-user-circle"></i> LOGGED IN AS: <span id="user-email" style="color: var(--accent-blue);">--</span>
+                    <div id="user-identity"
+                        style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono); display: none;">
+                        <i class="fas fa-user-circle"></i> LOGGED IN AS: <span id="user-email"
+                            style="color: var(--accent-blue);">--</span>
                     </div>
                     <div style="display: flex; gap: 1rem; align-items: center;">
 
-                    <!-- Navigation Buttons -->
-                    <div class="nav-links" style="border: none; margin: 0; padding: 0; display:flex; gap:0.5rem;">
-                        <a href="index.html" class="nav-link-btn" data-i18n="nav.home">
-                            <i class="fas fa-home"></i> Home
-                        </a>
-                        <a href="tools.html" class="nav-link-btn" data-i18n="nav.tools">
-                            <i class="fas fa-tools"></i> Tools
-                        </a>
-                        <a href="#" class="nav-link-btn danger" id="logout-btn" data-i18n="nav.logout">
-                            <i class="fas fa-sign-out-alt"></i> Logout
-                        </a>
-                        <a href="personal/index.html" class="nav-link-btn" data-i18n="nav.switchPersonal"
-                            style="border: 1px solid var(--text-secondary); white-space: nowrap !important; min-width: max-content; flex-shrink: 0;">
-                            <i class="fas fa-user-circle"></i> Switch to Personal
-                        </a>
-                        <div class="lang-switcher" style="margin-left: 0.5rem;">
-                            <select id="language-selector" style="height: 36px; padding: 0 0.5rem;">
-                                <option value="en">🇺🇸 English</option>
-                                <option value="tr">🇹🇷 Türkçe</option>
-                            </select>
+                        <!-- Navigation Buttons -->
+                        <div class="nav-links" style="border: none; margin: 0; padding: 0; display:flex; gap:0.5rem;">
+                            <a href="index.html" class="nav-link-btn" data-i18n="nav.home">
+                                <i class="fas fa-home"></i> Home
+                            </a>
+                            <a href="tools.html" class="nav-link-btn" data-i18n="nav.tools">
+                                <i class="fas fa-tools"></i> Tools
+                            </a>
+                            <a href="#" class="nav-link-btn danger" id="logout-btn" data-i18n="nav.logout">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </a>
+                            <a href="personal/index.html" class="nav-link-btn" data-i18n="nav.switchPersonal"
+                                style="border: 1px solid var(--text-secondary); white-space: nowrap !important; min-width: max-content; flex-shrink: 0;">
+                                <i class="fas fa-user-circle"></i> Switch to Personal
+                            </a>
+                            <div class="lang-switcher" style="margin-left: 0.5rem;">
+                                <select id="language-selector" style="height: 36px; padding: 0 0.5rem;">
+                                    <option value="en">🇺🇸 English</option>
+                                    <option value="tr">🇹🇷 Türkçe</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Theme Selector -->
+                        <select id="theme-selector"
+                            style="background: rgba(0,0,0,0.3); color: var(--text-primary); border: 1px solid var(--border-color); 
+                               padding: 0.5rem; border-radius: 4px; font-family: var(--font-mono); cursor: pointer; height: 36px;">
+                            <option value="">Standard</option>
+                            <option value="theme-matrix">Matrix</option>
+                            <option value="theme-nord">Nord</option>
+                            <option value="theme-solar">Solarized</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SYSTEM STATISTICS -->
+            <header style="margin-bottom: 2.5rem; margin-top: 2rem;">
+                <h1 class="mono-font" style="font-size: 2rem; margin-bottom: 0.5rem; color: var(--text-primary);"
+                    data-i18n="dashboard.title">System
+                    Statistics</h1>
+                <p style="color: var(--text-muted);" data-i18n="dashboard.subtitle">Monitoring visitor traffic and
+                    geographic distribution.</p>
+            </header>
+
+            <!-- Stats Grid -->
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
+                <div class="tech-card" style="text-align: center;">
+                    <h3
+                        style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem; text-transform: uppercase;">
+                        Total Hits</h3>
+                    <div style="font-size: 2.5rem; color: var(--accent-blue); font-weight: 700;" id="total-visits">0
+                    </div>
+                </div>
+                <div class="tech-card" style="text-align: center;">
+                    <h3
+                        style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem; text-transform: uppercase;">
+                        Unique IPs</h3>
+                    <!-- Fixed ID: unique-ips -> unique-visitors -->
+                    <div style="font-size: 2.5rem; color: var(--accent-green); font-weight: 700;" id="unique-visitors">0
+                    </div>
+                </div>
+                <div class="tech-card" style="text-align: center;">
+                    <h3
+                        style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem; text-transform: uppercase;">
+                        Top Region</h3>
+                    <!-- Fixed ID: top-region -> top-country -->
+                    <div style="font-size: 2.5rem; color: var(--accent-orange); font-weight: 700;" id="top-country">N/A
+                    </div>
+                </div>
+                <div class="tech-card" style="text-align: center;">
+                    <h3
+                        style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem; text-transform: uppercase;">
+                        Last Ping</h3>
+                    <!-- Fixed ID: last-ping -> last-active -->
+                    <div style="font-size: 2.5rem; color: var(--text-secondary); font-weight: 700;" id="last-active">
+                        Never
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inbox (Messages) -->
+            <section style="margin-bottom: 3rem;">
+                <h2 class="mono-font" style="font-size: 1.5rem; margin-bottom: 1rem;">Inbox (Messages)</h2>
+                <div class="tech-card" style="padding: 1.5rem; overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <th
+                                    style="text-align: left; padding: 0.75rem; color: var(--text-secondary); text-transform: uppercase; font-size: 0.8rem;">
+                                    Date</th>
+                                <th
+                                    style="text-align: left; padding: 0.75rem; color: var(--text-secondary); text-transform: uppercase; font-size: 0.8rem;">
+                                    From</th>
+                                <th
+                                    style="text-align: left; padding: 0.75rem; color: var(--text-secondary); text-transform: uppercase; font-size: 0.8rem;">
+                                    Type</th>
+                                <th
+                                    style="text-align: left; padding: 0.75rem; color: var(--text-secondary); text-transform: uppercase; font-size: 0.8rem;">
+                                    Message</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inbox-table-body">
+                            <tr>
+                                <td colspan="4" style="padding: 2rem; text-align: center; color: var(--text-muted);">
+                                    <i class="fas fa-inbox"
+                                        style="font-size: 2rem; margin-bottom: 0.5rem; opacity: 0.5;"></i><br>
+                                    No messages yet
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Recent Access Logs -->
+            <section>
+                <h2 class="mono-font" style="font-size: 1.5rem; margin-bottom: 1rem;">Recent Access Logs</h2>
+
+                <!-- Date Filter Controls -->
+                <div class="tech-card" style="padding: 1rem; margin-bottom: 1rem;">
+                    <div
+                        style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between;">
+                        <!-- Quick Filters -->
+                        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                            <button id="filter-today" class="filter-btn">
+                                <i class="fas fa-calendar-day"></i> Today
+                            </button>
+                            <button id="filter-week" class="filter-btn">
+                                <i class="fas fa-calendar-week"></i> This Week
+                            </button>
+                            <button id="filter-all" class="filter-btn active">
+                                <i class="fas fa-calendar"></i> All Time
+                            </button>
+                        </div>
+
+                        <!-- Custom Date Range -->
+                        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
+                            <label
+                                style="color: var(--text-secondary); font-size: 0.85rem; font-family: var(--font-mono);">Custom
+                                Range:</label>
+                            <input type="date" id="date-start" class="date-input" />
+                            <span style="color: var(--text-muted);">to</span>
+                            <input type="date" id="date-end" class="date-input" />
+                            <button id="apply-custom" class="filter-btn filter-btn-apply">
+                                <i class="fas fa-check"></i> Apply
+                            </button>
                         </div>
                     </div>
-
-                    <!-- Theme Selector -->
-                    <select id="theme-selector"
-                        style="background: rgba(0,0,0,0.3); color: var(--text-primary); border: 1px solid var(--border-color); 
-                               padding: 0.5rem; border-radius: 4px; font-family: var(--font-mono); cursor: pointer; height: 36px;">
-                        <option value="">Standard</option>
-                        <option value="theme-matrix">Matrix</option>
-                        <option value="theme-nord">Nord</option>
-                        <option value="theme-solar">Solarized</option>
-                    </select>
                 </div>
-            </div>
+
+                <div class="tech-card" style="padding: 1.5rem; overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="border-bottom: 1px solid var(--border-color);">
+                                <th
+                                    style="text-align: left; padding: 0.75rem; color: var(--text-secondary); text-transform: uppercase; font-size: 0.8rem;">
+                                    Timestamp</th>
+                                <th
+                                    style="text-align: left; padding: 0.75rem; color: var(--text-secondary); text-transform: uppercase; font-size: 0.8rem;">
+                                    IP Address</th>
+                                <th
+                                    style="text-align: left; padding: 0.75rem; color: var(--text-secondary); text-transform: uppercase; font-size: 0.8rem;">
+                                    Location</th>
+                                <th
+                                    style="text-align: left; padding: 0.75rem; color: var(--text-secondary); text-transform: uppercase; font-size: 0.8rem;">
+                                    Page</th>
+                            </tr>
+                        </thead>
+                        <!-- Fixed ID: logs-table -> visits-table-body -->
+                        <tbody id="visits-table-body">
+                            <tr>
+                                <td colspan="4" style="padding: 2rem; text-align: center; color: var(--text-muted);">
+                                    <i class="fas fa-chart-line"
+                                        style="font-size: 2rem; margin-bottom: 0.5rem; opacity: 0.5;"></i><br>
+                                    Loading analytics...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
         </div>
 
-        <!-- SYSTEM STATISTICS -->
-        <header style="margin-bottom: 2.5rem; margin-top: 2rem;">
-            <h1 class="mono-font" style="font-size: 2rem; margin-bottom: 0.5rem; color: var(--text-primary);"
-                data-i18n="dashboard.title">System
-                Statistics</h1>
-            <p style="color: var(--text-muted);" data-i18n="dashboard.subtitle">Monitoring visitor traffic and
-                geographic distribution.</p>
-        </header>
-
-        <!-- Stats Grid -->
-        <div
-            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
-            <div class="tech-card" style="text-align: center;">
-                <h3
-                    style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem; text-transform: uppercase;">
-                    Total Hits</h3>
-                <div style="font-size: 2.5rem; color: var(--accent-blue); font-weight: 700;" id="total-visits">0</div>
-            </div>
-            <div class="tech-card" style="text-align: center;">
-                <h3
-                    style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem; text-transform: uppercase;">
-                    Unique IPs</h3>
-                <!-- Fixed ID: unique-ips -> unique-visitors -->
-                <div style="font-size: 2.5rem; color: var(--accent-green); font-weight: 700;" id="unique-visitors">0
-                </div>
-            </div>
-            <div class="tech-card" style="text-align: center;">
-                <h3
-                    style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem; text-transform: uppercase;">
-                    Top Region</h3>
-                <!-- Fixed ID: top-region -> top-country -->
-                <div style="font-size: 2.5rem; color: var(--accent-orange); font-weight: 700;" id="top-country">N/A
-                </div>
-            </div>
-            <div class="tech-card" style="text-align: center;">
-                <h3
-                    style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem; text-transform: uppercase;">
-                    Last Ping</h3>
-                <!-- Fixed ID: last-ping -> last-active -->
-                <div style="font-size: 2.5rem; color: var(--text-secondary); font-weight: 700;" id="last-active">Never
-                </div>
-            </div>
-        </div>
-
-        <!-- Inbox (Messages) -->
-        <section style="margin-bottom: 3rem;">
-            <h2 class="mono-font" style="font-size: 1.5rem; margin-bottom: 1rem;">Inbox (Messages)</h2>
-            <div class="tech-card" style="padding: 1.5rem; overflow-x: auto;">
-                <table style="width: 100%; border-collapse: collapse;">
-                    <thead>
-                        <tr style="border-bottom: 1px solid var(--border-color);">
-                            <th
-                                style="text-align: left; padding: 0.75rem; color: var(--text-secondary); text-transform: uppercase; font-size: 0.8rem;">
-                                Date</th>
-                            <th
-                                style="text-align: left; padding: 0.75rem; color: var(--text-secondary); text-transform: uppercase; font-size: 0.8rem;">
-                                From</th>
-                            <th
-                                style="text-align: left; padding: 0.75rem; color: var(--text-secondary); text-transform: uppercase; font-size: 0.8rem;">
-                                Type</th>
-                            <th
-                                style="text-align: left; padding: 0.75rem; color: var(--text-secondary); text-transform: uppercase; font-size: 0.8rem;">
-                                Message</th>
-                        </tr>
-                    </thead>
-                    <tbody id="inbox-table-body">
-                        <tr>
-                            <td colspan="4" style="padding: 2rem; text-align: center; color: var(--text-muted);">
-                                <i class="fas fa-inbox"
-                                    style="font-size: 2rem; margin-bottom: 0.5rem; opacity: 0.5;"></i><br>
-                                No messages yet
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <!-- Recent Access Logs -->
-        <section>
-            <h2 class="mono-font" style="font-size: 1.5rem; margin-bottom: 1rem;">Recent Access Logs</h2>
-
-            <!-- Date Filter Controls -->
-            <div class="tech-card" style="padding: 1rem; margin-bottom: 1rem;">
-                <div
-                    style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between;">
-                    <!-- Quick Filters -->
-                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                        <button id="filter-today" class="filter-btn">
-                            <i class="fas fa-calendar-day"></i> Today
-                        </button>
-                        <button id="filter-week" class="filter-btn">
-                            <i class="fas fa-calendar-week"></i> This Week
-                        </button>
-                        <button id="filter-all" class="filter-btn active">
-                            <i class="fas fa-calendar"></i> All Time
-                        </button>
-                    </div>
-
-                    <!-- Custom Date Range -->
-                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
-                        <label
-                            style="color: var(--text-secondary); font-size: 0.85rem; font-family: var(--font-mono);">Custom
-                            Range:</label>
-                        <input type="date" id="date-start" class="date-input" />
-                        <span style="color: var(--text-muted);">to</span>
-                        <input type="date" id="date-end" class="date-input" />
-                        <button id="apply-custom" class="filter-btn filter-btn-apply">
-                            <i class="fas fa-check"></i> Apply
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tech-card" style="padding: 1.5rem; overflow-x: auto;">
-                <table style="width: 100%; border-collapse: collapse;">
-                    <thead>
-                        <tr style="border-bottom: 1px solid var(--border-color);">
-                            <th
-                                style="text-align: left; padding: 0.75rem; color: var(--text-secondary); text-transform: uppercase; font-size: 0.8rem;">
-                                Timestamp</th>
-                            <th
-                                style="text-align: left; padding: 0.75rem; color: var(--text-secondary); text-transform: uppercase; font-size: 0.8rem;">
-                                IP Address</th>
-                            <th
-                                style="text-align: left; padding: 0.75rem; color: var(--text-secondary); text-transform: uppercase; font-size: 0.8rem;">
-                                Location</th>
-                            <th
-                                style="text-align: left; padding: 0.75rem; color: var(--text-secondary); text-transform: uppercase; font-size: 0.8rem;">
-                                Page</th>
-                        </tr>
-                    </thead>
-                    <!-- Fixed ID: logs-table -> visits-table-body -->
-                    <tbody id="visits-table-body">
-                        <tr>
-                            <td colspan="4" style="padding: 2rem; text-align: center; color: var(--text-muted);">
-                                <i class="fas fa-chart-line"
-                                    style="font-size: 2rem; margin-bottom: 0.5rem; opacity: 0.5;"></i><br>
-                                Loading analytics...
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-    </div>
-
-    <!-- Additional Styles for new layout -->
-    <style>
-        /* Auth Overlay Styles */
-        #auth-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(10px);
-        }
-
-        .exit-btn-fixed {
-            position: absolute;
-            top: 2rem;
-            right: 2rem;
-            color: var(--text-secondary);
-            font-family: var(--font-mono);
-            text-decoration: none;
-            border: 1px solid var(--border-color);
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            transition: all 0.2s;
-            z-index: 10000;
-            /* Above everything */
-        }
-
-        .exit-btn-fixed:hover {
-            color: var(--accent-orange);
-            border-color: var(--accent-orange);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .nav-link-btn {
-            color: var(--text-secondary);
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            transition: all 0.2s;
-            border: 1px solid transparent;
-            background: rgba(255, 255, 255, 0.02);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .nav-link-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text-primary);
-            border-color: var(--border-color);
-        }
-
-        .nav-link-btn.danger:hover {
-            background: rgba(248, 81, 73, 0.1);
-            color: #f85149;
-            border-color: #f85149;
-        }
-
-        /* Filter Button Styles */
-        .filter-btn {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--border-color);
-            color: var(--text-secondary);
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .filter-btn:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: var(--accent-blue);
-            color: var(--text-primary);
-        }
-
-        .filter-btn.active {
-            background: rgba(0, 149, 255, 0.15);
-            border-color: var(--accent-blue);
-            color: var(--accent-blue);
-            font-weight: 600;
-        }
-
-        .filter-btn-apply {
-            background: rgba(0, 200, 83, 0.1);
-            border-color: var(--accent-green);
-            color: var(--accent-green);
-        }
-
-        .filter-btn-apply:hover {
-            background: rgba(0, 200, 83, 0.2);
-        }
-
-        /* Date Input Styles */
-        .date-input {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            padding: 0.5rem;
-            border-radius: 4px;
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            cursor: pointer;
-        }
-
-        .date-input:focus {
-            outline: none;
-            border-color: var(--accent-blue);
-            background: rgba(0, 0, 0, 0.5);
-        }
-
-        .date-input::-webkit-calendar-picker-indicator {
-            filter: invert(1);
-            cursor: pointer;
-        }
-    </style>
-
-    <!-- Netlify Identity Widget -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-
-    <!-- FIXED: Added type="module" to enable Firebase imports -->
-    <script type="module" src="js/dashboard.js"></script>
-
-    <script>
-        // Theme Selector Handler
-        document.getElementById('theme-selector').addEventListener('change', function (e) {
-            const theme = e.target.value;
-            document.body.classList.remove('theme-matrix', 'theme-nord', 'theme-solar');
-            if (theme) {
-                document.body.classList.add(theme);
+        <!-- Additional Styles for new layout -->
+        <style>
+            /* Auth Overlay Styles */
+            #auth-overlay {
+                position: fixed;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.95);
+                z-index: 9999;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                backdrop-filter: blur(10px);
             }
-            localStorage.setItem('selectedTheme', theme);
-        });
 
-        // Load saved theme
-        const savedTheme = localStorage.getItem('selectedTheme');
-        if (savedTheme) {
-            document.body.classList.add(savedTheme);
-            document.getElementById('theme-selector').value = savedTheme;
-        }
-    </script>
-    <script src="js/i18n.js"></script>
-    <script src="js/mobile-nav.js" defer></script>
-    <script>
-        i18n.init('en', 'translations/');
-    </script>
+            .exit-btn-fixed {
+                position: absolute;
+                top: 2rem;
+                right: 2rem;
+                color: var(--text-secondary);
+                font-family: var(--font-mono);
+                text-decoration: none;
+                border: 1px solid var(--border-color);
+                padding: 0.5rem 1rem;
+                border-radius: 4px;
+                transition: all 0.2s;
+                z-index: 10000;
+                /* Above everything */
+            }
+
+            .exit-btn-fixed:hover {
+                color: var(--accent-orange);
+                border-color: var(--accent-orange);
+                background: rgba(255, 255, 255, 0.05);
+            }
+
+            .nav-link-btn {
+                color: var(--text-secondary);
+                text-decoration: none;
+                padding: 0.5rem 1rem;
+                border-radius: 4px;
+                font-family: var(--font-mono);
+                font-size: 0.9rem;
+                transition: all 0.2s;
+                border: 1px solid transparent;
+                background: rgba(255, 255, 255, 0.02);
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            .nav-link-btn:hover {
+                background: rgba(255, 255, 255, 0.1);
+                color: var(--text-primary);
+                border-color: var(--border-color);
+            }
+
+            .nav-link-btn.danger:hover {
+                background: rgba(248, 81, 73, 0.1);
+                color: #f85149;
+                border-color: #f85149;
+            }
+
+            /* Filter Button Styles */
+            .filter-btn {
+                background: rgba(255, 255, 255, 0.02);
+                border: 1px solid var(--border-color);
+                color: var(--text-secondary);
+                padding: 0.5rem 1rem;
+                border-radius: 4px;
+                font-family: var(--font-mono);
+                font-size: 0.85rem;
+                cursor: pointer;
+                transition: all 0.2s;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            .filter-btn:hover {
+                background: rgba(255, 255, 255, 0.08);
+                border-color: var(--accent-blue);
+                color: var(--text-primary);
+            }
+
+            .filter-btn.active {
+                background: rgba(0, 149, 255, 0.15);
+                border-color: var(--accent-blue);
+                color: var(--accent-blue);
+                font-weight: 600;
+            }
+
+            .filter-btn-apply {
+                background: rgba(0, 200, 83, 0.1);
+                border-color: var(--accent-green);
+                color: var(--accent-green);
+            }
+
+            .filter-btn-apply:hover {
+                background: rgba(0, 200, 83, 0.2);
+            }
+
+            /* Date Input Styles */
+            .date-input {
+                background: rgba(0, 0, 0, 0.3);
+                border: 1px solid var(--border-color);
+                color: var(--text-primary);
+                padding: 0.5rem;
+                border-radius: 4px;
+                font-family: var(--font-mono);
+                font-size: 0.85rem;
+                cursor: pointer;
+            }
+
+            .date-input:focus {
+                outline: none;
+                border-color: var(--accent-blue);
+                background: rgba(0, 0, 0, 0.5);
+            }
+
+            .date-input::-webkit-calendar-picker-indicator {
+                filter: invert(1);
+                cursor: pointer;
+            }
+        </style>
+
+        <!-- Netlify Identity Widget -->
+        <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+        <!-- FIXED: Added type="module" to enable Firebase imports -->
+        <script type="module" src="js/dashboard.js?v=1.1"></script>
+
+        <script>
+            // Theme Selector Handler
+            document.getElementById('theme-selector').addEventListener('change', function (e) {
+                const theme = e.target.value;
+                document.body.classList.remove('theme-matrix', 'theme-nord', 'theme-solar');
+                if (theme) {
+                    document.body.classList.add(theme);
+                }
+                localStorage.setItem('selectedTheme', theme);
+            });
+
+            // Load saved theme
+            const savedTheme = localStorage.getItem('selectedTheme');
+            if (savedTheme) {
+                document.body.classList.add(savedTheme);
+                document.getElementById('theme-selector').value = savedTheme;
+            }
+        </script>
+        <script src="js/i18n.js"></script>
+        <script src="js/mobile-nav.js" defer></script>
+        <script>
+            i18n.init('en', 'translations/');
+        </script>
 </body>
 
 </html>
