@@ -9,7 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initAuth();
 });
 
-let unsubscribeSnapshot = null; // To stop listener on logout
+let unsubscribeVisits = null; // To stop visits listener on logout
+let unsubscribeInbox = null;  // To stop messages listener on logout
+
 
 // Filter State
 let currentFilter = 'all'; // 'today', 'week', 'all', 'custom' - default to 'all'
@@ -30,15 +32,37 @@ function initAuth() {
         if (user) {
             console.log('Auth: User logged in', user.email);
             overlay.style.display = 'none';
+            // Show user identity
+            const identity = document.getElementById('user-identity');
+            const userEmail = document.getElementById('user-email');
+            if (identity && userEmail) {
+                userEmail.textContent = user.email;
+                identity.style.display = 'block';
+            }
             initRealtimeListener();
             initInboxListener();
             initFilterControls();
         } else {
             console.log('Auth: User logged out');
             overlay.style.display = 'flex';
-            if (unsubscribeSnapshot) unsubscribeSnapshot();
+            // Hide user identity
+            const identity = document.getElementById('user-identity');
+            if (identity) identity.style.display = 'none';
+
+            // Clean up listeners
+            if (unsubscribeVisits) {
+                console.log("Auth: Unsubscribing from Visits...");
+                unsubscribeVisits();
+                unsubscribeVisits = null;
+            }
+            if (unsubscribeInbox) {
+                console.log("Auth: Unsubscribing from Inbox...");
+                unsubscribeInbox();
+                unsubscribeInbox = null;
+            }
         }
     });
+
 
     // Login Action (Click)
     loginBtn.addEventListener('click', () => performLogin());
@@ -86,7 +110,7 @@ function initRealtimeListener() {
     console.log("Dashboard: Connecting to Firestore Visits...");
     const q = query(collection(db, "visits"), orderBy("timestamp", "desc"), limit(100));
 
-    unsubscribeSnapshot = onSnapshot(q, (snapshot) => {
+    unsubscribeVisits = onSnapshot(q, (snapshot) => {
         const visits = [];
         snapshot.forEach((doc) => {
             const data = doc.data();
@@ -96,10 +120,13 @@ function initRealtimeListener() {
 
         updateDashboard(visits);
     }, (error) => {
-        console.error("Firestore Error:", error);
+        console.error("Firestore (Visits) Error:", error);
         if (error.code === 'permission-denied') {
-            document.getElementById('login-msg').textContent = "Session expired. Please login again.";
-            signOut(auth);
+            const msg = document.getElementById('login-msg');
+            msg.textContent = "Access Denied: Your account does not have permission to view this data.";
+            console.warn("Permission denied for visits. Logging out...");
+            // Optionally sign out if they shouldn't even be on this page
+            setTimeout(() => signOut(auth), 3000);
         }
     });
 }
@@ -108,7 +135,7 @@ function initInboxListener() {
     console.log("Dashboard: Connecting to Firestore Messages...");
     const q = query(collection(db, "messages"), orderBy("timestamp", "desc"), limit(50));
 
-    onSnapshot(q, (snapshot) => {
+    unsubscribeInbox = onSnapshot(q, (snapshot) => {
         const messages = [];
         snapshot.forEach((doc) => {
             const data = doc.data();
@@ -116,8 +143,14 @@ function initInboxListener() {
             messages.push({ ...data, id: doc.id, timestamp: date });
         });
         updateInbox(messages);
+    }, (error) => {
+        console.error("Firestore (Messages) Error:", error);
+        if (error.code === 'permission-denied') {
+            console.warn("Permission denied for messages.");
+        }
     });
 }
+
 
 function updateDashboard(visits) {
     try {
